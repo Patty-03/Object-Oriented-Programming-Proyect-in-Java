@@ -288,7 +288,7 @@ public class MenuPpal extends JFrame {
 		panel.add(separator);
 
 		btnNewButton = new JButton("Profesores");
-		btnNewButton.setBounds(58, 117, 133, 25);
+		btnNewButton.setBounds(58, 117, 172, 25);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -369,7 +369,7 @@ public class MenuPpal extends JFrame {
 		panel.add(btnAsignaturas);
 
 		btnNuevoProfesor = new JButton("Nuevo Profesor");
-		btnNuevoProfesor.setBounds(48, 282, 182, 25);
+		btnNuevoProfesor.setBounds(48, 282, 202, 25);
 		btnNuevoProfesor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNuevoProfesor.addMouseListener(new MouseAdapter() {
 			@Override
@@ -391,7 +391,7 @@ public class MenuPpal extends JFrame {
 		panel.add(btnNuevoProfesor);
 
 		btnNuevaPlanificacin = new JButton("Nueva Planificaci\u00F3n");
-		btnNuevaPlanificacin.setBounds(48, 320, 214, 25);
+		btnNuevaPlanificacin.setBounds(48, 320, 254, 25);
 		btnNuevaPlanificacin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNuevaPlanificacin.addMouseListener(new MouseAdapter() {
 			@Override
@@ -413,7 +413,7 @@ public class MenuPpal extends JFrame {
 		panel.add(btnNuevaPlanificacin);
 
 		btnNuevaAsignatura = new JButton("Nueva Asignatura");
-		btnNuevaAsignatura.setBounds(48, 358, 204, 35);
+		btnNuevaAsignatura.setBounds(48, 358, 254, 35);
 		btnNuevaAsignatura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNuevaAsignatura.addMouseListener(new MouseAdapter() {
 			@Override
@@ -464,7 +464,7 @@ public class MenuPpal extends JFrame {
 		panel.add(btnCerrarSesin);
 
 		btnAyuda = new JButton("Ayuda");
-		btnAyuda.setBounds(37, 473, 98, 25);
+		btnAyuda.setBounds(37, 473, 186, 25);
 		btnAyuda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAyuda.addMouseListener(new MouseAdapter() {
 			@Override
@@ -531,7 +531,7 @@ public class MenuPpal extends JFrame {
 		panel.add(btnConsultas);
 
 		btnAdministracin = new JButton("Administraci\u00F3n");
-		btnAdministracin.setBounds(37, 235, 182, 25);
+		btnAdministracin.setBounds(37, 235, 213, 25);
 		btnAdministracin.setHorizontalAlignment(SwingConstants.LEFT);
 		btnAdministracin.setForeground(Color.WHITE);
 		btnAdministracin.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
@@ -543,7 +543,7 @@ public class MenuPpal extends JFrame {
 
 		Imagen fondo = new Imagen((Icon) null);
 		fondo.setBounds(5, 38, 807, 568);
-		fondo.setImagen(new ImageIcon("C:\\Users\\admin\\Desktop\\Js_Proyects\\Simple Landing Page\\media\\bg.png"));
+		fondo.setImagen(new ImageIcon(MenuPpal.class.getResource("/images/bg.png")));
 		fondo.setForeground(Color.WHITE);
 		contentPane.add(fondo);
 
