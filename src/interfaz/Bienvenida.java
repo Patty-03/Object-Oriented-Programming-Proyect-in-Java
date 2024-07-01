@@ -80,7 +80,7 @@ public class Bienvenida extends JFrame {
 		
 		Imagen imagen = new Imagen((Icon) null);
 		imagen.setForeground(new Color(255, 255, 255));
-		imagen.setImagen(new ImageIcon("C:\\Users\\admin\\Desktop\\Js_Proyects\\Simple Landing Page\\media\\bg.png"));
+		imagen.setImagen(new ImageIcon(Bienvenida.class.getResource("/images/bg.png")));
 		imagen.setBounds(0, 0, 805, 527);
 		contentPane.add(imagen);
 	}
