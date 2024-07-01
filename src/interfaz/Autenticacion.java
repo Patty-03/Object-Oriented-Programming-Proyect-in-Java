@@ -143,7 +143,7 @@ public class Autenticacion extends JFrame {
 		contentPane.add(btnmcnContinuar);
 		
 		Imagen imagen = new Imagen((Icon) null);
-		imagen.setImagen(new ImageIcon("C:\\Users\\admin\\Desktop\\Js_Proyects\\Simple Landing Page\\media\\bg.png"));
+		imagen.setImagen(new ImageIcon(Autenticacion.class.getResource("/images/bg.png")));
 		imagen.setForeground(Color.WHITE);
 		imagen.setBounds(12, 35, 448, 528);
 		contentPane.add(imagen);
