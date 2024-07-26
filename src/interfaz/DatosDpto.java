@@ -96,7 +96,7 @@ public class DatosDpto extends JDialog {
 		panel.add(botonAnimacion);
 		
 		imagen_1 = new Imagen((Icon) null);
-		imagen_1.setImagen(new ImageIcon("C:\\Users\\admin\\Desktop\\Js_Proyects\\Simple Landing Page\\media\\bg.png"));
+		imagen_1.setImagen(new ImageIcon(DatosDpto.class.getResource("/images/bg.png")));
 		imagen_1.setBounds(0, 0, 426, 451);
 		panel.add(imagen_1);
 	}

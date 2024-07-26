@@ -40,7 +40,7 @@ public class AutenticCorrecta extends JDialog {
 	public AutenticCorrecta() {
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setUndecorated(true);
-		setBounds(100, 100, 300, 339);
+		setBounds(100, 100, 299, 340);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -10,12 +10,6 @@ public class AsignaturasTableModel extends DefaultTableModel{
 				"Nombre", "Disciplina", "Plan Estudio", "Semestre",
 				"Año", "Evaluación Final", "Carrera"
 		};
-		
-		/*public AsignaturasTableModel(Asignatura [] asignaturas){
-			String[] columnNames = {
-					"Nombre", "Disciplina", "Plan Estudio", "Semestre",
-					"Año", "Evaluación Final", "Carrera"
-			};		}*/
 	}
 
 }

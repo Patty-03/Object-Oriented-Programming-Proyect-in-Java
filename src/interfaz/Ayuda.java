@@ -103,7 +103,7 @@ public class Ayuda extends JDialog {
 		sl_panel.putConstraint(SpringLayout.WEST, fondo, 0, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, fondo, 476, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, fondo, 400, SpringLayout.WEST, panel);
-		fondo.setImagen(new ImageIcon("C:\\Users\\admin\\Desktop\\Js_Proyects\\Simple Landing Page\\media\\bg.png"));
+		fondo.setImagen(new ImageIcon(Ayuda.class.getResource("/images/bg.png")));
 		panel.add(fondo);
 	}
 }
