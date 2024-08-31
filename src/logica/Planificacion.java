@@ -1,51 +1,51 @@
 package logica;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 public class Planificacion {
-	private GregorianCalendar fecha;
+	private Date fecha;
 	private int curso;
 	private int semestre;
-	private ArrayList<AsigPorProf> asignaturasPorProfe; 
+	private AsigPorProf asignacion;
 	
-	public GregorianCalendar getFecha() {
-		return fecha;
+	public String getFecha() {
+		fecha = new Date();
+		@SuppressWarnings("deprecation")
+		String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
+		return date;
 	}
 	
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
 	public int getCurso() {
 		return curso;
 	}
-	
 	public void setCurso(int curso) {
 		this.curso = curso;
 	}
-	
 	public int getSemestre() {
 		return semestre;
 	}
-	
 	public void setSemestre(int semestre) {
 		this.semestre = semestre;
 	}
 
-	public ArrayList<AsigPorProf> getAsignaturasPorProfe() {
-		return asignaturasPorProfe;
+	public AsigPorProf getAsignacion() {
+		return asignacion;
 	}
-
-	public void setAsignaturasPorProfe(ArrayList<AsigPorProf> asignaturasPorProfe) {
-		this.asignaturasPorProfe = asignaturasPorProfe;
+	public void setAsignacion(AsigPorProf asignacion) {
+		this.asignacion = asignacion;
 	}
-
-	public Planificacion(GregorianCalendar fecha, int curso, int semestre,
-			ArrayList<AsigPorProf> asignaturasPorProfe) {
+	
+	public Planificacion(Date fecha, int curso, int semestre,
+			AsigPorProf asignacion) {
+		super();
 		this.fecha = fecha;
 		this.curso = curso;
 		this.semestre = semestre;
-		this.asignaturasPorProfe = asignaturasPorProfe;
-	}	
+		this.asignacion = asignacion;
+	}
+	
+	
 }
