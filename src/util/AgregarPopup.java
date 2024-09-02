@@ -24,6 +24,7 @@ public class AgregarPopup extends JDialog {
 	private JLabel label;
 
 	public AgregarPopup() {
+		getContentPane().setForeground(new Color(0, 0, 0));
 		setType(Type.POPUP);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);

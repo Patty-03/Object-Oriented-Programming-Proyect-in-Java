@@ -257,7 +257,8 @@ public class Principal extends JFrame {
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearProfesor profDialog = new CrearProfesor(Principal.this, dpto);
-				profDialog.setSize(515,584);
+				profDialog.setSize(654, 520);
+				profDialog.setLocation(600,300);
 				profDialog.setVisible(true);
 				tabla.setModel(p1);
 			}
@@ -446,7 +447,7 @@ public class Principal extends JFrame {
 		mntmDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] array = new String[2];
-				array[0] = "Programación";
+				array[0] = "Programaciï¿½n";
 				array[1] = "Inteligencia Artificial";
 				aparecerPopupReportes("Seleccione la disciplina deseada", array, "AsigPorDisciplinaTableModel");
 			}
@@ -488,7 +489,7 @@ public class Principal extends JFrame {
 				array[3] = "Asistente";
 				array[4] = "Instructor";
 				array[5] = "Adiestrado";
-				aparecerPopupReportes("Escriba la Categoría Docente deseada", array, "ProfPorCatDocTableModel");
+				aparecerPopupReportes("Escriba la Categorï¿½a Docente deseada", array, "ProfPorCatDocTableModel");
 
 			}
 		});
@@ -502,9 +503,9 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] array = new String[3];
 				array[0] = "Doctor en Ciencias";
-				array[1] = "Máster en Ciencias";
+				array[1] = "Mï¿½ster en Ciencias";
 				array[2] = "Ninguno";
-				aparecerPopupReportes("Escriba la Categoría Científica deseada", array, "ProfporCatCientif");
+				aparecerPopupReportes("Escriba la Categorï¿½a Cientï¿½fica deseada", array, "ProfporCatCientif");
 
 			}
 		});
