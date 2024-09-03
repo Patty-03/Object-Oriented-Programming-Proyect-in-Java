@@ -65,14 +65,23 @@ public class CrearProfesor extends JDialog{
 	private JSpinner spinnerSalario;
 	
 	private boolean validarCampos() {
-        if (textFieldNombre.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El campo Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (textFieldCI.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El campo CI no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+	    if (textFieldNombre.getText().trim().isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "El campo Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	    if (textFieldNombre.getText().matches(".*\\d.*")) {
+	        JOptionPane.showMessageDialog(this, "El nombre no puede contener números", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+
+	    if (textFieldCI.getText().trim().isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "El campo CI no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	    if (!textFieldCI.getText().matches("\\d{11}")) {
+	        JOptionPane.showMessageDialog(this, "El CI debe contener exactamente 11 caracteres numericos", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
         if (comboBoxCatDoc.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una Categoría Docente", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
