@@ -9,13 +9,13 @@ public class AsignaturasTableModel extends DefaultTableModel{
 
 	public AsignaturasTableModel(){
 		String[] columnNames = {
-				"Nombre", "Disciplina", "Plan", "Semestre", "Carrera", "Año", "Evaluacion Final"};
+				"Nombre", "Disciplina", "Plan", "Semestre", "Carrera", "AÃ±o", "Evaluacion Final"};
 		this.setColumnIdentifiers(columnNames);
 	}
 	
 	public AsignaturasTableModel(Asignatura [] asignaturas){
 		String[] columnNames = {
-				"Nombre", "Disciplina", "Plan", "Semestre", "Carrera", "Año", "Evaluacion Final"};
+				"Nombre", "Disciplina", "Plan", "Semestre", "Carrera", "AÃ±o", "Evaluacion Final"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < asignaturas.length; i++) {
 			Object[] newRow = new Object[]{asignaturas[i].getNombre(), asignaturas[i].getDisciplina(), 

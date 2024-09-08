@@ -9,13 +9,13 @@ public class ProfesoresTableModel extends DefaultTableModel{
 
 	public ProfesoresTableModel(){
 		String[] columnNames = {
-				"Nombre", "CI", "Disponibilidad", "Años de trabajo", "Tipo", "Cat.Docente", "Cat.Cientifica"};
+				"Nombre", "CI", "Disponibilidad", "AÃ±os de trabajo", "Tipo", "Cat.Docente", "Cat.Cientifica"};
 		this.setColumnIdentifiers(columnNames);
 	}
 
 	public ProfesoresTableModel(Docente [] docentes){
 		String[] columnNames = {
-				"Nombre", "CI", "Disponibilidad", "Años de trabajo", "Tipo", "Cat.Docente", "Cat.Cientifica"};
+				"Nombre", "CI", "Disponibilidad", "AÃ±os de trabajo", "Tipo", "Cat.Docente", "Cat.Cientifica"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < docentes.length; i++) {
 

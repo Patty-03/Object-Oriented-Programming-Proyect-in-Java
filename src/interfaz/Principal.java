@@ -328,7 +328,7 @@ public class Principal extends JFrame {
 		btnNuevaAsigPor.setContentAreaFilled(false);
 		btnNuevaAsigPor.setBorderPainted(false);
 		btnNuevaAsigPor.setBackground(SystemColor.menu);
-		btnNuevaAsigPor.setBounds(10, 193, 239, 35);
+		btnNuevaAsigPor.setBounds(20, 192, 229, 35);
 		panel.add(btnNuevaAsigPor);
 		
 		background1 = new JLabel("");
@@ -447,7 +447,7 @@ public class Principal extends JFrame {
 		mntmDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] array = new String[2];
-				array[0] = "Programaci�n";
+				array[0] = "Programación";
 				array[1] = "Inteligencia Artificial";
 				aparecerPopupReportes("Seleccione la disciplina deseada", array, "AsigPorDisciplinaTableModel");
 			}
@@ -489,7 +489,7 @@ public class Principal extends JFrame {
 				array[3] = "Asistente";
 				array[4] = "Instructor";
 				array[5] = "Adiestrado";
-				aparecerPopupReportes("Escriba la Categor�a Docente deseada", array, "ProfPorCatDocTableModel");
+				aparecerPopupReportes("Escriba la Categoría Docente deseada", array, "ProfPorCatDocTableModel");
 
 			}
 		});
@@ -503,9 +503,9 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] array = new String[3];
 				array[0] = "Doctor en Ciencias";
-				array[1] = "M�ster en Ciencias";
+				array[1] = "Máster en Ciencias";
 				array[2] = "Ninguno";
-				aparecerPopupReportes("Escriba la Categor�a Cient�fica deseada", array, "ProfporCatCientif");
+				aparecerPopupReportes("Escriba la Categoría Científica deseada", array, "ProfporCatCientif");
 
 			}
 		});

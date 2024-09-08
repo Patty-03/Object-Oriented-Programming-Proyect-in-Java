@@ -9,13 +9,13 @@ public class ProfPorDispTableModel extends DefaultTableModel{
 
 	public ProfPorDispTableModel(){
 		String[] columnNames = {
-				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. científica"};
+				"Nombre", "CI", "AÃ±os de trabajo", "Cat. Docente", "Cat. cientÃ­fica"};
 		this.setColumnIdentifiers(columnNames);
 	}
 	
 	public ProfPorDispTableModel(Docente [] profesores){
 		String[] columnNames = {
-				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. científica"};
+				"Nombre", "CI", "AÃ±os de trabajo", "Cat. Docente", "Cat. cientÃ­fica"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < profesores.length; i++) {
 			Object[] newRow = new Object[]{profesores[i].getNombre(), profesores[i].getiD(), 

@@ -83,7 +83,7 @@ public class LoginCorrecto extends JDialog {
 		
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 300, 400);
-		label.setIcon(new ImageIcon("/imagenes/loginCorrecto.png"));
+		label.setIcon(new ImageIcon(LoginCorrecto.class.getResource("/imagenes/loginCorrecto.png")));
 		contentPanel.add(label);
 	}
 }

@@ -23,7 +23,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Dpto dpto = new Dpto("Ingenier�a de Software", "Sonia Perez Lovelle", "Ingenier�a Inform�tica");
+					Dpto dpto = new Dpto("Ingeniería de Software", "Sonia Perez Lovelle", "Ingeniería Informática");
 					inicializarDatos(dpto);
 					PantallaDeCarga frame = new PantallaDeCarga(dpto);
 					frame.setVisible(true);
@@ -39,11 +39,11 @@ public class Main {
 		
 		//Inicializar Profes
 		Docente prof1 = new Docente("63041918976", "Sonia Perez", "Disponible", 5000, 30, "Profesor Titular", "Doctor en Ciencias");
-		Docente prof2 = new Docente("85121067683", "Ferm�n Rivas", "Disponible", 4500, 11, "Ninguno", "Ninguno");
+		Docente prof2 = new Docente("85121067683", "Fermín Rivas", "Disponible", 4500, 11, "Ninguno", "Ninguno");
 		Adiestrado ad1 = new Adiestrado("00122158945", "Daniel Pardo", "Disponible", 3000, 1,"Adiestrado", "Ninguno", true);
 		Adiestrado ad2 = new Adiestrado("00122158945", "Daniel Pardo", "Disponible", 3000, 2,"Adiestrado", "Ninguno", true);
-		Docente prof3 = new Docente("70051918956", "Raisa Socorro", "Disponible", 5000, 30, "Profesor Titular", "M�ster en Ciencias");
-		Docente prof4 = new Docente("70051918956", "Alejandro Rosette", "Beca", 5000, 30, "Profesor Titular", "M�ster en Ciencias");
+		Docente prof3 = new Docente("70051918956", "Raisa Socorro", "Disponible", 5000, 30, "Profesor Titular", "Máster en Ciencias");
+		Docente prof4 = new Docente("70051918956", "Alejandro Rosette", "Beca", 5000, 30, "Profesor Titular", "Máster en Ciencias");
 		Docente prof5 = new Docente("03081598657", "Omar David", "Disponible", 2500, 0, "ATD", "Ninguno");
 		
 		dpto.getDocentes().add(prof1);
@@ -58,14 +58,14 @@ public class Main {
 		//DPOO
 		ArrayList<TipoEnsenanza> ensenanzasDpoo = new ArrayList<TipoEnsenanza>();
 		TipoEnsenanza tp1 = new TipoEnsenanza("Conferencia", 7);
-		TipoEnsenanza tp2 = new TipoEnsenanza("Clase Pr�ctica", 12);
+		TipoEnsenanza tp2 = new TipoEnsenanza("Clase Práctica", 12);
 		TipoEnsenanza tp3 = new TipoEnsenanza("Laboratorio", 6);
 		
 		ensenanzasDpoo.add(tp1);
 		ensenanzasDpoo.add(tp2);
 		ensenanzasDpoo.add(tp3);
 
-		Asignatura asig1 = new Asignatura("Introducci�n a la Programaci�n", "Programaci�n", 'E', 1, "Inform�tica", 1, "Evaluaci�n Final", ensenanzasDpoo);	
+		Asignatura asig1 = new Asignatura("Introducción a la Programación", "Programación", 'E', 1, "Informática", 1, "Evaluación Final", ensenanzasDpoo);	
 		
 		//MD
 		ArrayList<TipoEnsenanza> ensenanzasMD = new ArrayList<TipoEnsenanza>();
@@ -76,19 +76,19 @@ public class Main {
 		ensenanzasMD.add(tp5);
 
 
-		Asignatura asig2 = new Asignatura("Matem�tica Discreta", "Inteligencia Artificial", 'E', 1, "Inform�tica", 1, "Ninguna", ensenanzasMD);	
+		Asignatura asig2 = new Asignatura("Matemática Discreta", "Inteligencia Artificial", 'E', 1, "Informática", 1, "Ninguna", ensenanzasMD);	
 		
 		//IP
 		ArrayList<TipoEnsenanza> ensenanzasIP = new ArrayList<TipoEnsenanza>();
 		TipoEnsenanza tp6 = new TipoEnsenanza("Conferencia", 5);
-		TipoEnsenanza tp7 = new TipoEnsenanza("Clase Pr�ctica", 10);
+		TipoEnsenanza tp7 = new TipoEnsenanza("Clase Práctica", 10);
 		TipoEnsenanza tp8 = new TipoEnsenanza("Laboratorio", 3);
 		
 		ensenanzasIP.add(tp6);
 		ensenanzasIP.add(tp7);
 		ensenanzasIP.add(tp8);
 
-		Asignatura asig3 = new Asignatura("Dise�o y Programaci�n Orientada a Objetos", "Programaci�n", 'E', 2, "Inform�tica", 1, "Evaluaci�n Final", ensenanzasIP);	
+		Asignatura asig3 = new Asignatura("Diseño y Programación Orientada a Objetos", "Programación", 'E', 2, "Informática", 1, "Evaluación Final", ensenanzasIP);	
 		
 		dpto.getAsignaturas().add(asig1);
 		dpto.getAsignaturas().add(asig2);
@@ -97,9 +97,9 @@ public class Main {
 		//Inicializando Asignaturas por Profesor
 		ArrayList<AsigPorProf> aProf = new ArrayList<AsigPorProf>();
 		
-		AsigPorProf asp1 = new AsigPorProf(5, "Introducci�n a la Programaci�n", "Conferencia", "Ferm�n Rivas", 11);
+		AsigPorProf asp1 = new AsigPorProf(5, "Introducción a la Programación", "Conferencia", "Fermín Rivas", 11);
 		AsigPorProf asp2 = new AsigPorProf(5, "Matematica Discreta", "Seminario", "Raisa Socorro", 14);
-		AsigPorProf asp3 = new AsigPorProf(12, "Dise�o y Programaci�n Orientada a Objetos", "Clase Pr�ctica", "Sonia P�rez", 13);
+		AsigPorProf asp3 = new AsigPorProf(12, "Diseño y Programación Orientada a Objetos", "Clase Práctica", "Sonia Pérez", 13);
 		
 		aProf.add(asp1);
 		aProf.add(asp2);

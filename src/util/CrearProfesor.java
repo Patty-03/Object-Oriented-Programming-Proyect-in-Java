@@ -28,9 +28,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.*;
 import java.awt.*;
 
+import logica.Adiestrado;
 import logica.Docente;
 import logica.Dpto;
-import logica.Validaciones;
+import util.Validaciones;
 import modelos.ProfesoresTableModel;
 
 public class CrearProfesor extends JDialog{
@@ -64,40 +65,8 @@ public class CrearProfesor extends JDialog{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JSpinner spinnerSalario;
 	
-	private boolean validarCampos() {
-	    if (textFieldNombre.getText().trim().isEmpty()) {
-	        JOptionPane.showMessageDialog(this, "El campo Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
-	        return false;
-	    }
-	    if (textFieldNombre.getText().matches(".*\\d.*")) {
-	        JOptionPane.showMessageDialog(this, "El nombre no puede contener números", "Error", JOptionPane.ERROR_MESSAGE);
-	        return false;
-	    }
-
-	    if (textFieldCI.getText().trim().isEmpty()) {
-	        JOptionPane.showMessageDialog(this, "El campo CI no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
-	        return false;
-	    }
-	    if (!textFieldCI.getText().matches("\\d{11}")) {
-	        JOptionPane.showMessageDialog(this, "El CI debe contener exactamente 11 caracteres numericos", "Error", JOptionPane.ERROR_MESSAGE);
-	        return false;
-	    }
-        if (comboBoxCatDoc.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una Categoría Docente", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (comboBoxCatCientif.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una Categoría Científica", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (comboBoxDisp.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una Disponibilidad", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
+	private Validaciones validaciones = new Validaciones();
 	
-	@SuppressWarnings("deprecation")
 	public CrearProfesor(Principal p, final Dpto dpto) {
 		getContentPane().setForeground(new Color(0, 0, 0));
 		ppal = p;
@@ -237,17 +206,20 @@ public class CrearProfesor extends JDialog{
 		buttonGroup.add(autorizado);
 		buttonGroup.add(noAutorizado);
 		
-		
 
 		button_1 = new JButton("");
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	            if (Validaciones.validarVacio(textFieldNombre, "nombre")) {
-	                p1 = crearProfesor(dpto);
-	                JOptionPane.showMessageDialog(CrearProfesor.this, "Profesor agregado de manera satisfactoria");
-	                dispose();
-	            }
+            public void actionPerformed(ActionEvent e) {
+                if (validaciones.validarVacio(textFieldNombre, "Nombre") && 
+                    validaciones.contieneNumeros(textFieldNombre, "Nombre") &&
+                	validaciones.validarCI(textFieldCI) &&
+                	validaciones.validarSeleccion(comboBoxCatCientif, getName()) &&
+                	validaciones.validarSeleccion(comboBoxCatDoc, getName())){
+                    p1 = crearProfesor(dpto);
+                    JOptionPane.showMessageDialog(CrearProfesor.this, "Profesor agregado de manera satisfactoria");
+                    dispose();
+                }
 	        }
 		});
 		button_1.setIcon(new ImageIcon(CrearProfesor.class.getResource("/imagenes/Button.png")));
@@ -313,11 +285,27 @@ public class CrearProfesor extends JDialog{
 		antiguedad = (int) spinnerAntiguedad.getValue();
 		salarioBase =  (float) spinnerSalario.getValue();
 		
+		comboBoxCatDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String item = (String) comboBoxCatDoc.getSelectedItem();
+				if(item.equals("Adiestrado")){					
+					noAutorizado.setEnabled(true);
+					autorizado.setEnabled(true);
+				} else {
+					noAutorizado.setEnabled(false);
+					autorizado.setEnabled(false);
+				}
+			}
+		});
+		
 		if(catDoc.equals("Adiestrado")){
 			isAdiestrado = true;
+			dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
+		} else {
+			dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
 		}
 		
-		dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
+		//dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
 		p1 = ppal.getProfesoresTableModel();
 		p1.adicionar(nombre, iD, disponibilidad, antiguedad, isAdiestrado, catDoc, catCientif);
 		return p1;

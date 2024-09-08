@@ -9,13 +9,13 @@ public class AsignacionesTableModel extends DefaultTableModel{
 	
 	public AsignacionesTableModel(){
 		String[] columnNames = {
-				"Nombre Profesor", "Asignatura", "Tipo de enseñanza", "Horas Clase", "Grupo"};
+				"Nombre Profesor", "Asignatura", "Tipo de enseÃ±anza", "Horas Clase", "Grupo"};
 		this.setColumnIdentifiers(columnNames);
 	}
 	
 	public AsignacionesTableModel(AsigPorProf [] asignaciones){
 		String[] columnNames = {
-				"Nombre Profesor", "Asignatura", "Tipo de enseñanza", "Horas Clase", "Grupo"};
+				"Nombre Profesor", "Asignatura", "Tipo de enseÃ±anza", "Horas Clase", "Grupo"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < asignaciones.length; i++) {
 			Object[] newRow = new Object[]{asignaciones[i].getNombreProf(), asignaciones[i].getAsignatura(), asignaciones[i].getTipoEnsenanza(),
