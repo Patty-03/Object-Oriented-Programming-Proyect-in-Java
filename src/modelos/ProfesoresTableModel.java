@@ -27,10 +27,12 @@ public class ProfesoresTableModel extends DefaultTableModel{
 	}
 
 	public void adicionar(String nombre, String iD, String disponibilidad, int antiguedad, boolean isAdiestrado, 
-			String catDoc, String catCientif){
-		Object[] newRow = new Object[]{nombre, iD, disponibilidad, antiguedad, catDoc, catCientif};
-		addRow(newRow);
+	        String catDoc, String catCientif){
+	    String tipo = isAdiestrado ? "Adiestrado" : "Docente";
+	    Object[] newRow = new Object[]{nombre, iD, disponibilidad, antiguedad, tipo, catDoc, catCientif};
+	    addRow(newRow);
 	}
+
 
 	public void eliminar(int pos){
 		removeRow(pos);

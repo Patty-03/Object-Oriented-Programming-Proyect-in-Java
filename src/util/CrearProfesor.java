@@ -271,43 +271,30 @@ public class CrearProfesor extends JDialog{
 	
 	
 	public ProfesoresTableModel crearProfesor(Dpto dpto){
-		String nombre, iD, disponibilidad, catDoc, catCientif;
-		int antiguedad;
-		float salarioBase;
-		boolean isAdiestrado = false;
+	    String nombre, iD, disponibilidad, catDoc, catCientif;
+	    int antiguedad;
+	    float salarioBase;
+	    boolean isAdiestrado = false;
 
-		nombre = textFieldNombre.getText();
-		iD = textFieldCI.getText();
+	    nombre = textFieldNombre.getText();
+	    iD = textFieldCI.getText();
 
-		disponibilidad = (String) comboBoxDisp.getSelectedItem();
-		catDoc = (String) comboBoxCatDoc.getSelectedItem();
-		catCientif = (String) comboBoxCatCientif.getSelectedItem();
-		antiguedad = (int) spinnerAntiguedad.getValue();
-		salarioBase =  (float) spinnerSalario.getValue();
-		
-		comboBoxCatDoc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String item = (String) comboBoxCatDoc.getSelectedItem();
-				if(item.equals("Adiestrado")){					
-					noAutorizado.setEnabled(true);
-					autorizado.setEnabled(true);
-				} else {
-					noAutorizado.setEnabled(false);
-					autorizado.setEnabled(false);
-				}
-			}
-		});
-		
-		if(catDoc.equals("Adiestrado")){
-			isAdiestrado = true;
-			dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
-		} else {
-			dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
-		}
-		
-		//dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
-		p1 = ppal.getProfesoresTableModel();
-		p1.adicionar(nombre, iD, disponibilidad, antiguedad, isAdiestrado, catDoc, catCientif);
-		return p1;
+	    disponibilidad = (String) comboBoxDisp.getSelectedItem();
+	    catDoc = (String) comboBoxCatDoc.getSelectedItem();
+	    catCientif = (String) comboBoxCatCientif.getSelectedItem();
+	    antiguedad = (int) spinnerAntiguedad.getValue();
+	    salarioBase =  (float) spinnerSalario.getValue();
+	    
+	    if(catDoc.equals("Adiestrado")){
+	        isAdiestrado = true;
+	        dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, true));
+	    } else {
+	        dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
+	    }
+	    
+	    p1 = ppal.getProfesoresTableModel();
+	    p1.adicionar(nombre, iD, disponibilidad, antiguedad, isAdiestrado, catDoc, catCientif);
+	    return p1;
 	}
+
 }
