@@ -30,8 +30,8 @@ import java.awt.*;
 
 import logica.Docente;
 import logica.Dpto;
+import logica.Validaciones;
 import modelos.ProfesoresTableModel;
-import javax.swing.border.LineBorder;
 
 public class CrearProfesor extends JDialog{
 	private static final long serialVersionUID = 1L;
@@ -105,7 +105,6 @@ public class CrearProfesor extends JDialog{
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		
-		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 				
 		labelNombre = new JLabel("NOMBRE");
 		labelNombre.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -239,13 +238,12 @@ public class CrearProfesor extends JDialog{
 		buttonGroup.add(noAutorizado);
 		
 		
-		
-		
+
 		button_1 = new JButton("");
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            if (validarCampos()) {
+	            if (Validaciones.validarVacio(textFieldNombre, "nombre")) {
 	                p1 = crearProfesor(dpto);
 	                JOptionPane.showMessageDialog(CrearProfesor.this, "Profesor agregado de manera satisfactoria");
 	                dispose();

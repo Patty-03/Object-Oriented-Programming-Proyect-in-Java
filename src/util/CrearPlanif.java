@@ -121,11 +121,18 @@ public class CrearPlanif extends JDialog {
 		comboBoxProf = new JComboBox();
 		comboBoxProf.setBounds(139, 163, 110, 22);
 		getContentPane().add(comboBoxProf);
-		String[]arrayprof = new String[dpto.getAsignacionesAsignaturas().size()];
-		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
-			arrayprof[i] =	dpto.getAsignacionesAsignaturas().get(i).getNombreProf();
-		}
-		comboBoxProf.setModel(new DefaultComboBoxModel<>(arrayprof));
+		String[] arrayprof = new String[dpto.getAsignacionesAsignaturas().size()];
+        int count = 0;
+        for (int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++) {
+            AsigPorProf asignacion = dpto.getAsignacionesAsignaturas().get(i);
+            if (asignacion.getHorasClase() < 12) {
+                arrayprof[count] = asignacion.getNombreProf();
+                count++;
+        }
+        String[] profesoresFiltrados = new String[count];
+        System.arraycopy(arrayprof, 0, profesoresFiltrados, 0, count);
+            
+        comboBoxProf.setModel(new DefaultComboBoxModel<>(profesoresFiltrados));
 
 		lblAsignatura = new JLabel("ASIGNATURA");
 		lblAsignatura.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -136,7 +143,7 @@ public class CrearPlanif extends JDialog {
 		comboBoxAsig.setBounds(139, 220, 110, 22);
 		getContentPane().add(comboBoxAsig);
 		String[]array = new String[dpto.getAsignacionesAsignaturas().size()];
-		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
+		for(i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
 			array[i] =	dpto.getAsignacionesAsignaturas().get(i).getAsignatura();
 		}
 		comboBoxAsig.setModel(new DefaultComboBoxModel<>(array));
@@ -309,7 +316,7 @@ public class CrearPlanif extends JDialog {
 		getContentPane().add(comboBoxEnsenanza);
 		
 		String[]arrayE = new String[dpto.getAsignacionesAsignaturas().size()];
-		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
+		for(i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
 			arrayE[i] =	dpto.getAsignacionesAsignaturas().get(i).getTipoEnsenanza();
 		}
 		comboBoxEnsenanza.setModel(new DefaultComboBoxModel<>(arrayE));
@@ -324,5 +331,6 @@ public class CrearPlanif extends JDialog {
 		getContentPane().add(dateChooser);
 
 	}
-}
+	}
+	}
 
