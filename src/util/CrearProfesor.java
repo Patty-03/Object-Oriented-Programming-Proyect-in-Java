@@ -62,12 +62,14 @@ public class CrearProfesor extends JDialog{
 	/**
 	 * @wbp.nonvisual location=361,644
 	 */
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup;
 	private JSpinner spinnerSalario;
 	
-	private Validaciones validaciones = new Validaciones();
+	private Validaciones validaciones;
 	
 	public CrearProfesor(Principal p, final Dpto dpto) {
+		buttonGroup = new ButtonGroup();
+		validaciones = new Validaciones();
 		getContentPane().setForeground(new Color(0, 0, 0));
 		ppal = p;
 		setUndecorated(true);
@@ -138,6 +140,7 @@ public class CrearProfesor extends JDialog{
 		getContentPane().add(noAutorizado);
 		
 		autorizado = new JRadioButton("S\u00ED");
+		autorizado.setSelected(true);
 		autorizado.setEnabled(false);
 		autorizado.setBounds(507, 307, 55, 25);
 		getContentPane().add(autorizado);
@@ -275,6 +278,7 @@ public class CrearProfesor extends JDialog{
 	    int antiguedad;
 	    float salarioBase;
 	    boolean isAdiestrado = false;
+	    boolean autorizacion = true;
 
 	    nombre = textFieldNombre.getText();
 	    iD = textFieldCI.getText();
@@ -285,9 +289,13 @@ public class CrearProfesor extends JDialog{
 	    antiguedad = (int) spinnerAntiguedad.getValue();
 	    salarioBase =  (float) spinnerSalario.getValue();
 	    
+	    if(buttonGroup.getSelection() == noAutorizado) {
+	    	autorizacion = false;
+	    }
+	    
 	    if(catDoc.equals("Adiestrado")){
 	        isAdiestrado = true;
-	        dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, true));
+	        dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, autorizacion));
 	    } else {
 	        dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
 	    }
