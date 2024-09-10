@@ -12,7 +12,7 @@ public class TipoEnsenanza {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("El nombre no puede estar vacÃ­o.");
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
         }
     }
 
@@ -24,7 +24,7 @@ public class TipoEnsenanza {
         if (horas > 0) {
             this.horas = horas;
         } else {
-            throw new IllegalArgumentException("Las horas deben ser un nÃºmero positivo.");
+            throw new IllegalArgumentException("Las horas deben ser un número positivo.");
         }
     }
 

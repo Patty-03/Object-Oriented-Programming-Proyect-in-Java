@@ -29,7 +29,7 @@ public class Asignatura {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("El nombre de la asignatura no puede estar vacÃ­o");
+            throw new IllegalArgumentException("El nombre de la asignatura no puede estar vacío");
         }
     }
 
@@ -37,7 +37,7 @@ public class Asignatura {
         if (disciplina != null && !disciplina.trim().isEmpty()) {
             this.disciplina = disciplina;
         } else {
-            throw new IllegalArgumentException("La disciplina no puede estar vacÃ­a");
+            throw new IllegalArgumentException("La disciplina no puede estar vacía");
         }
     }
 
@@ -45,7 +45,7 @@ public class Asignatura {
         if (Character.isLetter(planEstudio)) {
             this.planEstudio = planEstudio;
         } else {
-            throw new IllegalArgumentException("El plan de estudio debe ser una letra");
+            throw new IllegalArgumentException("El plan de estudio debe ser una letra mayúscula");
         }
     }
 
@@ -53,7 +53,7 @@ public class Asignatura {
         if (semestre > 0) {
             this.semestre = semestre;
         } else {
-            throw new IllegalArgumentException("El semestre debe ser un nÃºmero positivo");
+            throw new IllegalArgumentException("El semestre debe ser un número positivo");
         }
     }
 
@@ -61,7 +61,7 @@ public class Asignatura {
         if (carrera != null && !carrera.trim().isEmpty()) {
             this.carrera = carrera;
         } else {
-            throw new IllegalArgumentException("La carrera no puede estar vacÃ­a");
+            throw new IllegalArgumentException("La carrera no puede estar vacía");
         }
     }
 
@@ -69,7 +69,7 @@ public class Asignatura {
         if (anio > 0) {
             this.anio = anio;
         } else {
-            throw new IllegalArgumentException("El aÃ±o debe ser un nÃºmero positivo");
+            throw new IllegalArgumentException("El año debe ser un número positivo");
         }
     }
 
@@ -77,7 +77,7 @@ public class Asignatura {
         if (evaluacionFinal != null && !evaluacionFinal.trim().isEmpty()) {
             this.evaluacionFinal = evaluacionFinal;
         } else {
-            throw new IllegalArgumentException("La evaluaciÃ³n final no puede estar vacÃ­a");
+            throw new IllegalArgumentException("La evaluación final no puede estar vacía");
         }
     }
 
@@ -85,7 +85,7 @@ public class Asignatura {
         if (ensenanzas != null && !ensenanzas.isEmpty()) {
             this.ensenanzas = ensenanzas;
         } else {
-            throw new IllegalArgumentException("Debe haber al menos un tipo de enseÃ±anza");
+            throw new IllegalArgumentException("Debe haber al menos un tipo de enseñanza");
         }
     }
 

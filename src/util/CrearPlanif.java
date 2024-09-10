@@ -24,13 +24,13 @@ import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import logica.AsigPorProf;
 import logica.Dpto;
 import logica.Planificacion;
 
 import com.toedter.calendar.JDateChooser;
-import javax.swing.border.LineBorder;
 
 public class CrearPlanif extends JDialog {
 
@@ -65,11 +65,6 @@ public class CrearPlanif extends JDialog {
 	 * @wbp.nonvisual location=451,224
 	 */
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JCheckBox checkBoxConf;
-	private JCheckBox checkBoxCP;
-	private JCheckBox checkBoxLab;
-	private JCheckBox checkBoxTaller;
-	private JCheckBox checkBoxSem;
 	private JLabel lblHoras;
 	private JSpinner spinner;
 	/**
@@ -148,32 +143,7 @@ public class CrearPlanif extends JDialog {
 		}
 		comboBoxAsig.setModel(new DefaultComboBoxModel<>(array));
 
-		label = new JLabel("CONFERENCIA");
-		label.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		label.setBounds(285, 120, 221, 29);
-		getContentPane().add(label);
-
-		label_1 = new JLabel("CLASE PRACTICA");
-		label_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		label_1.setBounds(285, 162, 221, 21);
-		getContentPane().add(label_1);
-
-		label_2 = new JLabel("LABORATORIO");
-		label_2.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		label_2.setBounds(285, 198, 221, 21);
-		getContentPane().add(label_2);
-
-		label_3 = new JLabel("TALLER");
-		label_3.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		label_3.setBounds(285, 232, 221, 22);
-		getContentPane().add(label_3);
-
-		label_4 = new JLabel("SEMINARIO");
-		label_4.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		label_4.setBounds(285, 267, 221, 21);
-		getContentPane().add(label_4);
-
-		lblTipoDeEnseanza = new JLabel("TIPO DE ENSE\u00D1ANZA");
+		lblTipoDeEnseanza = new JLabel("TIPO DE ENSEÑANZA");
 		lblTipoDeEnseanza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTipoDeEnseanza.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblTipoDeEnseanza.setBounds(275, 76, 243, 16);
@@ -227,26 +197,6 @@ public class CrearPlanif extends JDialog {
 		button.setBounds(184, 419, 161, 63);
 		getContentPane().add(button);
 
-		checkBoxConf = new JCheckBox("");
-		checkBoxConf.setBounds(487, 126, 31, 21);
-		getContentPane().add(checkBoxConf);
-
-		checkBoxCP = new JCheckBox("");
-		checkBoxCP.setBounds(487, 164, 31, 21);
-		getContentPane().add(checkBoxCP);
-
-		checkBoxLab = new JCheckBox("");
-		checkBoxLab.setBounds(487, 204, 31, 21);
-		getContentPane().add(checkBoxLab);
-
-		checkBoxTaller = new JCheckBox("");
-		checkBoxTaller.setBounds(487, 234, 31, 21);
-		getContentPane().add(checkBoxTaller);
-
-		checkBoxSem = new JCheckBox("");
-		checkBoxSem.setBounds(487, 269, 31, 21);
-		getContentPane().add(checkBoxSem);
-
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		panel.setLayout(null);
@@ -274,13 +224,7 @@ public class CrearPlanif extends JDialog {
 		button_1.setBorder(null);
 		button_1.setBackground(Color.GRAY);
 		button_1.setBounds(482, -1, 48, 40);
-		panel.add(button_1);
-
-		buttonGroup.add(checkBoxCP);
-		buttonGroup.add(checkBoxConf);
-		buttonGroup.add(checkBoxTaller);
-		buttonGroup.add(checkBoxSem);
-		buttonGroup.add(checkBoxLab);		
+		panel.add(button_1);		
 
 		JLabel lblFecha = new JLabel("FECHA");
 		lblFecha.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -321,7 +265,7 @@ public class CrearPlanif extends JDialog {
 		}
 		comboBoxEnsenanza.setModel(new DefaultComboBoxModel<>(arrayE));
 
-		lblEnseanza = new JLabel("ENSE\u00D1ANZA");
+		lblEnseanza = new JLabel("ENSEÑANZA");
 		lblEnseanza.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblEnseanza.setBounds(285, 351, 116, 16);
 		getContentPane().add(lblEnseanza);

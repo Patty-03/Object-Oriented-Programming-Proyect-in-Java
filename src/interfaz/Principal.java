@@ -107,14 +107,14 @@ public class Principal extends JFrame {
 		popupReportes = new ReportesPopup(this, d);
 
 
-		
+
 		panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBackground(new Color(248, 248, 255));
 		panel.setBounds(0, 40, 250, 560);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		button_8 = new JButton("Cerrar Sesi\u00F3n");
 		button_8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_8.addActionListener(new ActionListener() {
@@ -131,7 +131,7 @@ public class Principal extends JFrame {
 		button_8.setBackground(SystemColor.menu);
 		button_8.setBounds(18, 435, 213, 38);
 		panel.add(button_8);
-		
+
 		button_9 = new JButton("Ayuda");
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,7 +149,7 @@ public class Principal extends JFrame {
 		button_9.setBackground(SystemColor.menu);
 		button_9.setBounds(18, 471, 213, 38);
 		panel.add(button_9);
-		
+
 		button_10 = new JButton("Informaci\u00F3n");
 		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -167,13 +167,13 @@ public class Principal extends JFrame {
 		button_10.setBackground(SystemColor.menu);
 		button_10.setBounds(18, 509, 213, 38);
 		panel.add(button_10);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBackground(Color.GRAY);
 		separator.setForeground(Color.GRAY);
 		separator.setBounds(11, 433, 220, 2);
 		panel.add(separator);
-		
+
 		button = new JButton("Consultas");
 		button.setHorizontalAlignment(SwingConstants.LEFT);
 		button.setForeground(Color.DARK_GRAY);
@@ -184,7 +184,7 @@ public class Principal extends JFrame {
 		button.setBackground(SystemColor.menu);
 		button.setBounds(-1, 30, 250, 25);
 		panel.add(button);
-		
+
 		button_1 = new JButton("Profesores");
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
@@ -203,7 +203,7 @@ public class Principal extends JFrame {
 		button_1.setBackground(SystemColor.menu);
 		button_1.setBounds(20, 70, 229, 25);
 		panel.add(button_1);
-		
+
 		button_2 = new JButton("Planificaciones");
 		button_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_2.addActionListener(new ActionListener() {
@@ -222,7 +222,7 @@ public class Principal extends JFrame {
 		button_2.setBackground(SystemColor.menu);
 		button_2.setBounds(19, 110, 230, 25);
 		panel.add(button_2);
-		
+
 		button_3 = new JButton("Asignaturas");
 		button_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_3.addActionListener(new ActionListener() {
@@ -241,7 +241,7 @@ public class Principal extends JFrame {
 		button_3.setBackground(SystemColor.menu);
 		button_3.setBounds(20, 150, 229, 30);
 		panel.add(button_3);
-		
+
 		button_4 = new JButton("Administraci\u00F3n");
 		button_4.setHorizontalAlignment(SwingConstants.LEFT);
 		button_4.setForeground(Color.DARK_GRAY);
@@ -252,7 +252,7 @@ public class Principal extends JFrame {
 		button_4.setBackground(SystemColor.menu);
 		button_4.setBounds(-1, 258, 250, 25);
 		panel.add(button_4);
-		
+
 		button_5 = new JButton("Nuevo Profesor");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -273,7 +273,7 @@ public class Principal extends JFrame {
 		button_5.setBackground(SystemColor.menu);
 		button_5.setBounds(10, 298, 239, 25);
 		panel.add(button_5);
-		
+
 		button_6 = new JButton("Nueva Planificaci\u00F3n");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -292,7 +292,7 @@ public class Principal extends JFrame {
 		button_6.setBackground(SystemColor.menu);
 		button_6.setBounds(10, 338, 239, 25);
 		panel.add(button_6);
-		
+
 		button_7 = new JButton("Nueva Asignatura");
 		button_7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_7.addActionListener(new ActionListener() {
@@ -311,7 +311,7 @@ public class Principal extends JFrame {
 		button_7.setBackground(SystemColor.menu);
 		button_7.setBounds(10, 378, 239, 35);
 		panel.add(button_7);
-		
+
 		btnNuevaAsigPor = new JButton("Asig. por Profesor");
 		btnNuevaAsigPor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -330,19 +330,19 @@ public class Principal extends JFrame {
 		btnNuevaAsigPor.setBackground(SystemColor.menu);
 		btnNuevaAsigPor.setBounds(20, 192, 229, 35);
 		panel.add(btnNuevaAsigPor);
-		
+
 		background1 = new JLabel("");
 		background1.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/Imagen Pantalla Carga.gif")));
 		background1.setBounds(0, 0, 250, 560);
 		panel.add(background1);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(null);
 		panel_1.setBackground(new Color(248, 248, 255));
 		panel_1.setBounds(0, 0, 1000, 40);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		exitButton = new JButton("X");
 		exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		exitButton.addMouseListener(new MouseAdapter() {
@@ -373,30 +373,31 @@ public class Principal extends JFrame {
 		exitButton.setIcon(null);
 		exitButton.setContentAreaFilled(false);
 		exitButton.setBorder(null);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setForeground(Color.DARK_GRAY);
 		menuBar.setBorderPainted(false);
 		menuBar.setBounds(0, 0, 1000, 40);
 		panel_1.add(menuBar);
-		
+
 		mnMenu = new JMenu("Edicion");
 		mnMenu.setForeground(Color.DARK_GRAY);
 		mnMenu.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		mnMenu.setBorder(null);
 		menuBar.add(mnMenu);
-		
+
 		mntmEditar = new JMenuItem("Editar");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
+				//COMING SOON
+				/*try{
 					int pos = tabla.getSelectedRow();
 					System.out.println(tabla.getValueAt(pos, 1));
 					if (pos != -1){
 						if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("ProfesoresTableModel")){
 							p1.modificar(pos, (String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 1), (String)tabla.getValueAt(pos, 2), 
 									(int)tabla.getValueAt(pos, 3), (String)tabla.getValueAt(pos, 4), (String)tabla.getValueAt(pos, 5), 
-									(String)tabla.getValueAt(pos, 6));
+									(String)tabla.getValueAt(pos, 6), (String)tabla.getValueAt(pos, 7));
 							p1.actualizarTabla();
 						}
 						else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsiganturasTableModel")){
@@ -407,20 +408,20 @@ public class Principal extends JFrame {
 						}
 						else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignacionesTableModel")){
 							cargarTablaAsignaciones();
+						}
 					}
-				}
 
 				}
 				catch(ArrayIndexOutOfBoundsException ex){
-						JOptionPane.showMessageDialog(Principal.this, "Seleccione una fila para eliminar");
+					JOptionPane.showMessageDialog(Principal.this, "Seleccione una fila para eliminar");
 				}
-			}
-		});
+			}*/
+		}});
 		mntmEditar.setForeground(Color.DARK_GRAY);
 		mntmEditar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mntmEditar.setBorder(null);
 		mnMenu.add(mntmEditar);
-		
+
 		mntmBorrar = new JMenuItem("Borrar");
 		mntmBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
@@ -431,18 +432,18 @@ public class Principal extends JFrame {
 		mntmBorrar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mntmBorrar.setBorder(null);
 		mnMenu.add(mntmBorrar);
-		
+
 		JMenu mnListar = new JMenu("Listar");
 		mnListar.setForeground(Color.DARK_GRAY);
 		mnListar.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		menuBar.add(mnListar);
-		
+
 		JMenu mnAsignaturas = new JMenu("Asignaturas");
 		mnAsignaturas.setBorder(null);
 		mnAsignaturas.setForeground(Color.DARK_GRAY);
 		mnAsignaturas.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnListar.add(mnAsignaturas);
-		
+
 		mntmDisciplina = new JMenuItem("Disciplina");
 		mntmDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -456,13 +457,13 @@ public class Principal extends JFrame {
 		mntmDisciplina.setForeground(Color.DARK_GRAY);
 		mntmDisciplina.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnAsignaturas.add(mntmDisciplina);
-		
+
 		mnDocentes = new JMenu("Docentes");
 		mnDocentes.setBorder(null);
 		mnDocentes.setForeground(Color.DARK_GRAY);
 		mnDocentes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnListar.add(mnDocentes);
-		
+
 		mntmDisponibilidad = new JMenuItem("Disponibilidad");
 		mntmDisponibilidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -478,7 +479,7 @@ public class Principal extends JFrame {
 		mntmDisponibilidad.setForeground(Color.DARK_GRAY);
 		mntmDisponibilidad.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnDocentes.add(mntmDisponibilidad);
-		
+
 		mntmCatDocente = new JMenuItem("Cat. Docente");
 		mntmCatDocente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -497,7 +498,7 @@ public class Principal extends JFrame {
 		mntmCatDocente.setForeground(Color.DARK_GRAY);
 		mntmCatDocente.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnDocentes.add(mntmCatDocente);
-		
+
 		mntmCatCientifica = new JMenuItem("Cat. Cientifica");
 		mntmCatCientifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -505,7 +506,7 @@ public class Principal extends JFrame {
 				array[0] = "Doctor en Ciencias";
 				array[1] = "Máster en Ciencias";
 				array[2] = "Ninguno";
-				aparecerPopupReportes("Escriba la Categoría Científica deseada", array, "ProfporCatCientif");
+				aparecerPopupReportes("Seleccione la Categoría Científica deseada", array, "ProfporCatCientif");
 
 			}
 		});
@@ -513,144 +514,175 @@ public class Principal extends JFrame {
 		mntmCatCientifica.setForeground(Color.DARK_GRAY);
 		mntmCatCientifica.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnDocentes.add(mntmCatCientifica);
-		
+
 		mnOtros = new JMenu("Otros");
 		mnOtros.setBorder(null);
 		mnOtros.setForeground(Color.DARK_GRAY);
 		mnOtros.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		menuBar.add(mnOtros);
-		
+
 		mntmCalcularSalario = new JMenuItem("Calcular salario");
+		mntmCalcularSalario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String[] array = new String[20];
+
+				for(int i=0; i < dpto.getDocentes().size(); i++){
+					array[i] = dpto.getDocentes().get(i).getNombre();
+				}
+				aparecerPopupReportes("Seleccione el profesor deseado", array, "CalcSalario");
+			}
+		});
 		mntmCalcularSalario.setBorder(null);
 		mntmCalcularSalario.setForeground(Color.DARK_GRAY);
 		mntmCalcularSalario.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmCalcularSalario);
-		
+
 		mntmAsignaturasPorDocente = new JMenuItem("Asignaturas por docente");
+		mntmAsignaturasPorDocente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String[] array = new String[20];
+
+				for(int i=0; i < dpto.getDocentes().size(); i++){
+					array[i] = dpto.getDocentes().get(i).getNombre();
+				}
+				aparecerPopupReportes("Seleccione el profesor deseado", array, "AsigPorDoc");
+			}
+		});
 		mntmAsignaturasPorDocente.setBorder(null);
 		mntmAsignaturasPorDocente.setForeground(Color.DARK_GRAY);
 		mntmAsignaturasPorDocente.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmAsignaturasPorDocente);
-		
+
 		mntmDocentePorAsignatura = new JMenuItem("Docente por Asignatura");
+		mntmDocentePorAsignatura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String[] array = new String[20];
+
+				for(int i=0; i < dpto.getAsignaturas().size(); i++){
+					array[i] = dpto.getAsignaturas().get(i).getNombre();
+				}
+
+				aparecerPopupReportes("Seleccione la asignatura deseada", array, "DocPorAsig");
+			}
+		});
 		mntmDocentePorAsignatura.setBorder(null);
 		mntmDocentePorAsignatura.setForeground(Color.DARK_GRAY);
 		mntmDocentePorAsignatura.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmDocentePorAsignatura);
-		
+
 		JMenuItem mntmDocentesConMs = new JMenuItem("Docentes con m\u00E1s de 12h");
 		mntmDocentesConMs.setForeground(Color.DARK_GRAY);
 		mntmDocentesConMs.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmDocentesConMs);
-		
+
 		background = new JLabel("");
 		background.setBounds(0, 0, 1000, 600);
 		panel_1.add(background);
 		background.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/Imagen Pantalla Carga.gif")));
-		
+
 		tituloTabla = new JLabel("PANEL PRINCIPAL");
 		tituloTabla.setForeground(Color.DARK_GRAY);
 		tituloTabla.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		tituloTabla.setHorizontalAlignment(SwingConstants.CENTER);
 		tituloTabla.setBounds(523, 53, 194, 22);
 		contentPane.add(tituloTabla);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(277, 135, 711, 405);
 		contentPane.add(scrollPane);
-		
+
 		tabla = new JTable();
 		tabla.enableInputMethods(true);
 		scrollPane.setViewportView(tabla);
 
-		
+
 		cargarTodasLasTablas();
 	}
-	
+
 	public void cargarTodasLasTablas(){
 		pl1 = cargarTablaPlanif();
 		a1 = cargarTablaAsig();
 		as1 = cargarTablaAsignaciones();
 		p1 = cargarTablaProf();
 	}
-	
+
 	public void aparecerPopupReportes(String titulo, String[] array, String codigo){
 		popupReportes.tipoReporte(titulo, array, codigo);
 		popupReportes.setVisible(true);
 	}
-	
+
 	public AsignaturasTableModel cargarTablaAsig(){
 		tituloTabla.setText("ASIGNATURAS");
 
 		ArrayList<Asignatura> asignaturas = d.getAsignaturas();
 		Asignatura[] valores = new Asignatura[asignaturas.size()];
-		
+
 		int i = 0;
-		
+
 		for(Asignatura a: asignaturas){
 			valores[i] = a;
 			i++;
 		}
 		tableModel = new AsignaturasTableModel(valores);
 		tabla.setModel(tableModel);
-		
+
 		return (AsignaturasTableModel) tableModel;
 	}
-	
+
 	public ProfesoresTableModel cargarTablaProf(){
 		tituloTabla.setText("PROFESORES");
 
 		ArrayList<Docente> docentes = d.getDocentes();
 		Docente[] valores = new Docente[docentes.size()];
-		
+
 		int i = 0;
-		
+
 		for(Docente a: docentes){
 			valores[i] = a;
 			i++;
 		}
 		tableModel = new ProfesoresTableModel(valores);
 		tabla.setModel(tableModel);
-		
+
 		return (ProfesoresTableModel)tableModel;
 	}
-	
+
 	public PlanificacionesTableModel cargarTablaPlanif(){
 		tituloTabla.setText("PLANIFICACIONES");
 
 		ArrayList<Planificacion> planif = d.getRegistro();
 		Planificacion[] valores = new Planificacion[planif.size()];
-		
+
 		int i = 0;
-		
+
 		for(Planificacion a: planif){
 			valores[i] = a;
 			i++;
 		}
 		tableModel = new PlanificacionesTableModel(valores);
 		tabla.setModel(tableModel);
-		
+
 		return (PlanificacionesTableModel) tableModel;
 	}
-	
+
 	public AsignacionesTableModel cargarTablaAsignaciones(){
 		tituloTabla.setText("ASIGNACIONES");
 
 		ArrayList<AsigPorProf> asig = d.getAsignacionesAsignaturas();
 		AsigPorProf[] valores = new AsigPorProf[asig.size()];
-		
+
 		int i = 0;
-		
+
 		for(AsigPorProf a: asig){
 			valores[i] = a;
 			i++;
 		}
 		tableModel = new AsignacionesTableModel(valores);
 		tabla.setModel(tableModel);
-		
+
 		return (AsignacionesTableModel) tableModel;
 	}
-	
+
 	public void eliminarElmto(JTable tabla){
 		try{
 			int pos = tabla.getSelectedRow();
@@ -671,19 +703,19 @@ public class Principal extends JFrame {
 				else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignacionesTableModel")){
 					as1.eliminar(pos);
 					as1.actualizarTabla();
+				}
 			}
-		}
 
 		}
 		catch(ArrayIndexOutOfBoundsException ex){
-				JOptionPane.showMessageDialog(Principal.this, "Seleccione una fila para eliminar");
+			JOptionPane.showMessageDialog(Principal.this, "Seleccione una fila para eliminar");
 		}
 	}
-	
+
 	public AsignaturasTableModel getAsignaturasTableModel(){
 		return a1;
 	}
-	
+
 	public ProfesoresTableModel getProfesoresTableModel(){
 		return p1;
 	}

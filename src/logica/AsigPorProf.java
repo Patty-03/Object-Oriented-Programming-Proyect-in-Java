@@ -22,7 +22,7 @@ public class AsigPorProf {
         if (horasClase > 0) {
             this.horasClase = horasClase;
         } else {
-            throw new IllegalArgumentException("Las horas de clase deben ser un nÃºmero positivo");
+            throw new IllegalArgumentException("Las horas de clase deben ser un número positivo");
         }
     }
 
@@ -30,7 +30,7 @@ public class AsigPorProf {
         if (asignatura != null && !asignatura.trim().isEmpty()) {
             this.asignatura = asignatura;
         } else {
-            throw new IllegalArgumentException("La asignatura no puede estar vacÃ­a");
+            throw new IllegalArgumentException("La asignatura no puede estar vacía");
         }
     }
 
@@ -38,7 +38,7 @@ public class AsigPorProf {
         if (tipoEnsenanza != null && !tipoEnsenanza.trim().isEmpty()) {
             this.tipoEnsenanza = tipoEnsenanza;
         } else {
-            throw new IllegalArgumentException("El tipo de enseÃ±anza no puede estar vacÃ­o");
+            throw new IllegalArgumentException("El tipo de enseñanza no puede estar vacío");
         }
     }
 
@@ -46,7 +46,7 @@ public class AsigPorProf {
         if (nombreProf != null && !nombreProf.trim().isEmpty()) {
             this.nombreProf = nombreProf;
         } else {
-            throw new IllegalArgumentException("El nombre del profesor no puede estar vacÃ­o");
+            throw new IllegalArgumentException("El nombre del profesor no puede estar vacío");
         }
     }
 
@@ -54,7 +54,7 @@ public class AsigPorProf {
         if (grupo > 0) {
             this.grupo = grupo;
         } else {
-            throw new IllegalArgumentException("El grupo debe ser un nÃºmero positivo");
+            throw new IllegalArgumentException("El grupo debe ser un número positivo");
         }
     }
 

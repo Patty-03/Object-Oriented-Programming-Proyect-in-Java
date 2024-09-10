@@ -48,9 +48,7 @@ public class CrearProfesor extends JDialog{
 	private JLabel labelAutorizacion;
 	private JRadioButton autorizado;
 	private JRadioButton noAutorizado;
-	private JSeparator separator_2;
 	private JLabel lblDatosPersonales;
-	private JSeparator separator_3;
 	private JLabel lblDatosProfesionales;
 	private JButton button_1;
 	private JComboBox comboBoxCatCientif;
@@ -125,15 +123,6 @@ public class CrearProfesor extends JDialog{
 		JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor)spinnerAntiguedad.getEditor();
 		editor.getTextField().setEditable(false);
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(11, 351, 491, 2);
-		getContentPane().add(separator);
-		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setBounds(241, 77, 2, 237);
-		getContentPane().add(separator_1);
-		
 		noAutorizado = new JRadioButton("No");
 		noAutorizado.setEnabled(false);
 		noAutorizado.setBounds(562, 307, 50, 25);
@@ -155,21 +144,11 @@ public class CrearProfesor extends JDialog{
 		comboBoxDisp.setBounds(496, 256, 116, 22);
 		getContentPane().add(comboBoxDisp);
 		
-		separator_2 = new JSeparator();
-		separator_2.setBackground(Color.LIGHT_GRAY);
-		separator_2.setBounds(27, 96, 188, 2);
-		getContentPane().add(separator_2);
-		
 		lblDatosPersonales = new JLabel("DATOS PERSONALES");
 		lblDatosPersonales.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosPersonales.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblDatosPersonales.setBounds(84, 77, 235, 21);
 		getContentPane().add(lblDatosPersonales);
-		
-		separator_3 = new JSeparator();
-		separator_3.setBackground(Color.LIGHT_GRAY);
-		separator_3.setBounds(282, 96, 188, 2);
-		getContentPane().add(separator_3);
 		
 		lblDatosProfesionales = new JLabel("DATOS PROFESIONALES");
 		lblDatosProfesionales.setHorizontalAlignment(SwingConstants.CENTER);
@@ -240,6 +219,8 @@ public class CrearProfesor extends JDialog{
 				if(item.equals("Adiestrado")){
 					noAutorizado.setEnabled(true);
 					autorizado.setEnabled(true);
+					comboBoxCatCientif.setSelectedItem("Ninguno");
+					comboBoxCatCientif.setEnabled(false);
 				}
 				else{
 					noAutorizado.setEnabled(false);
@@ -301,7 +282,7 @@ public class CrearProfesor extends JDialog{
 	    }
 	    
 	    p1 = ppal.getProfesoresTableModel();
-	    p1.adicionar(nombre, iD, disponibilidad, antiguedad, isAdiestrado, catDoc, catCientif);
+	    p1.adicionar(nombre, iD, disponibilidad, antiguedad, catDoc, catCientif, autorizacion);
 	    return p1;
 	}
 

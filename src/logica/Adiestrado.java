@@ -25,10 +25,10 @@ public class Adiestrado extends Docente {
 
     @Override
     public void setNombre(String nombre) {
-        if (nombre != null && !nombre.trim().isEmpty() && nombre.matches("^[a-zA-Z ]+$")) {
+        if (nombre != null && !nombre.trim().isEmpty()) {
             super.setNombre(nombre);
         } else {
-            throw new IllegalArgumentException("El nombre debe contener solo letras y espacios, y no puede estar vac√≠o");
+            throw new IllegalArgumentException("El nombre debe contener solo letras y espacios, y no puede estar vacÌo");
         }
     }
 
@@ -37,7 +37,7 @@ public class Adiestrado extends Docente {
         if (disponibilidad != null && !disponibilidad.trim().isEmpty()) {
             super.setDisponibilidad(disponibilidad);
         } else {
-            throw new IllegalArgumentException("La disponibilidad no puede estar vac√≠a");
+            throw new IllegalArgumentException("La disponibilidad no puede estar vacÌo");
         }
     }
 
@@ -46,7 +46,7 @@ public class Adiestrado extends Docente {
         if (salarioBase > 0) {
             super.setSalarioBase(salarioBase);
         } else {
-            throw new IllegalArgumentException("El salario base debe ser un n√∫mero positivo");
+            throw new IllegalArgumentException("El salario base debe ser un n˙mero positivo");
         }
     }
 
@@ -55,7 +55,7 @@ public class Adiestrado extends Docente {
         if (antiguedad >= 0) {
             super.setAntiguedad(antiguedad);
         } else {
-            throw new IllegalArgumentException("La antig√ºedad no puede ser negativa");
+            throw new IllegalArgumentException("La antiguedad no puede ser negativa");
         }
     }
 
@@ -64,7 +64,7 @@ public class Adiestrado extends Docente {
         if (catDoc != null && !catDoc.trim().isEmpty()) {
             super.setCatDoc(catDoc);
         } else {
-            throw new IllegalArgumentException("La categor√≠a docente no puede estar vac√≠a");
+            throw new IllegalArgumentException("La categorÌa docente no puede estar vacÌa");
         }
     }
 
@@ -73,7 +73,7 @@ public class Adiestrado extends Docente {
         if (catCientif != null && !catCientif.trim().isEmpty()) {
             super.setCatCientif(catCientif);
         } else {
-            throw new IllegalArgumentException("La categor√≠a cient√≠fica no puede estar vac√≠a");
+            throw new IllegalArgumentException("La categorÌa cientÌfica no puede estar vacÌa");
         }
     }
 }

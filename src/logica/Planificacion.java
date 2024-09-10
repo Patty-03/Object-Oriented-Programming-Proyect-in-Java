@@ -21,7 +21,7 @@ public class Planificacion {
         if (fecha != null) {
             this.fecha = fecha;
         } else {
-            throw new IllegalArgumentException("La fecha no puede estar vacÃ­a.");
+            throw new IllegalArgumentException("La fecha no puede estar vacía.");
         }
     }
 
@@ -33,7 +33,7 @@ public class Planificacion {
         if (curso > 0) {
             this.curso = curso;
         } else {
-            throw new IllegalArgumentException("El curso debe ser un nÃºmero positivo.");
+            throw new IllegalArgumentException("El curso debe ser un número positivo.");
         }
     }
 
@@ -57,7 +57,7 @@ public class Planificacion {
         if (asignacion != null) {
             this.asignacion = asignacion;
         } else {
-            throw new IllegalArgumentException("La asignaciÃ³n no puede estar vacÃ­a.");
+            throw new IllegalArgumentException("La asignación no puede estar vacía.");
         }
     }
 

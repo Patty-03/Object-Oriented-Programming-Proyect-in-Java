@@ -29,7 +29,7 @@ public class Dpto {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("El nombre del departamento no puede estar vacÃ­o.");
+            throw new IllegalArgumentException("El nombre del departamento no puede estar vacío.");
         }
     }
 
@@ -37,7 +37,7 @@ public class Dpto {
         if (facultad != null && !facultad.trim().isEmpty()) {
             this.facultad = facultad;
         } else {
-            throw new IllegalArgumentException("El nombre de la facultad no puede estar vacÃ­o.");
+            throw new IllegalArgumentException("El nombre de la facultad no puede estar vacío.");
         }
     }
 
@@ -45,7 +45,7 @@ public class Dpto {
         if (nombreJefeDpto != null && !nombreJefeDpto.trim().isEmpty()) {
             this.nombreJefeDpto = nombreJefeDpto;
         } else {
-            throw new IllegalArgumentException("El nombre del jefe de departamento no puede estar vacÃ­o.");
+            throw new IllegalArgumentException("El nombre del jefe de departamento no puede estar vacíos.");
         }
     }
 
@@ -200,5 +200,66 @@ public class Dpto {
             }
         }
         return valores;
+    }
+    
+    public ArrayList<Docente> buscarProfPorAsig(String asig) {
+        ArrayList<Docente> valores = new ArrayList<>();
+        int b;
+        
+        for (AsigPorProf d : asignacionesAsignaturas) {
+            if (d.getAsignatura().equals(asig)) {
+            	b = buscarProfesor(d.getNombreProf());
+            	valores.add(docentes.get(b));
+            }
+        }
+        return valores;
+    }
+    
+    public ArrayList<Asignatura> buscarAsigPorProf(String prof) {
+    	System.out.println(prof);
+        ArrayList<Asignatura> valores = new ArrayList<Asignatura>();
+        ArrayList<String> asignaciones = new ArrayList<String>();
+        
+        for(AsigPorProf as1:asignacionesAsignaturas){
+        	System.out.println("Entro en el for");
+        	if(as1.getNombreProf().equalsIgnoreCase(prof)){
+        		asignaciones.add(as1.getAsignatura());
+        		System.out.println("se agrego " + as1.getAsignatura());
+        	}
+        }
+        for(int i = 0; i < asignaciones.size(); i++){
+        	for(int j = 0; j < asignaturas.size(); j++){
+        		if(asignaciones.get(i).equals(asignaturas.get(j).getNombre())){
+        			System.out.println("Agrego una asignatura :)");
+        			valores.add(asignaturas.get(j));        			
+        		}
+        	}
+        }
+        
+        return valores;
+    }
+    
+    public int buscarProfesor(String nombre){
+    	int pos = 0;
+    	
+    	for(int i = 0; i < docentes.size(); i++){
+    		if(docentes.get(i).getNombre().equals(nombre)){
+    			pos = i;
+    		}
+    	}
+    	
+    	return pos;
+    }
+    
+    public int devolverHorasPorProf(String asig, String prof){
+    	int horas = 0;
+    	
+    	for(AsigPorProf a1: asignacionesAsignaturas){
+    		if(a1.getAsignatura().equals(asig) && a1.getNombreProf().equals(prof)){
+    			horas += a1.getHorasClase();
+    		}
+    	}
+    	
+    	return horas;
     }
 }

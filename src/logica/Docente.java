@@ -26,7 +26,7 @@ public class Docente {
         if (iD != null && !iD.trim().isEmpty() && iD.matches("^[a-zA-Z0-9]+$")) {
             this.iD = iD;
         } else {
-            throw new IllegalArgumentException("El ID no puede estar vac√≠o y debe contener solo letras y n√∫meros");
+            throw new IllegalArgumentException("El ID no puede estar vacÌo y debe contener solo letras y n˙meros");
         }
     }
 
@@ -34,7 +34,7 @@ public class Docente {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("El nombre no puede estar vac√≠o");
+            throw new IllegalArgumentException("El nombre no puede estar vacÌo");
         }
     }
 
@@ -42,7 +42,7 @@ public class Docente {
         if (disponibilidad != null && !disponibilidad.trim().isEmpty()) {
             this.disponibilidad = disponibilidad;
         } else {
-            throw new IllegalArgumentException("La disponibilidad no puede estar vac√≠a");
+            throw new IllegalArgumentException("La disponibilidad no puede estar vacÌa");
         }
     }
 
@@ -50,7 +50,7 @@ public class Docente {
         if (salarioBase > 0) {
             this.salarioBase = salarioBase;
         } else {
-            throw new IllegalArgumentException("El salario base debe ser un n√∫mero positivo");
+            throw new IllegalArgumentException("El salario base debe ser un n˙mero positivo");
         }
     }
 
@@ -58,7 +58,7 @@ public class Docente {
         if (antiguedad >= 0) {
             this.antiguedad = antiguedad;
         } else {
-            throw new IllegalArgumentException("La antig√ºedad no puede ser negativa");
+            throw new IllegalArgumentException("La antiguedad no puede ser negativa");
         }
     }
 
@@ -66,7 +66,7 @@ public class Docente {
         if (catDoc != null && !catDoc.trim().isEmpty()) {
             this.catDoc = catDoc;
         } else {
-            throw new IllegalArgumentException("La categor√≠a docente no puede estar vac√≠a");
+            throw new IllegalArgumentException("La categorÌa docente no puede estar vacÌa");
         }
     }
 
@@ -74,7 +74,7 @@ public class Docente {
         if (catCientif != null && !catCientif.trim().isEmpty()) {
             this.catCientif = catCientif;
         } else {
-            throw new IllegalArgumentException("La categor√≠a cient√≠fica no puede estar vac√≠a");
+            throw new IllegalArgumentException("La categorÌa cientÌfica no puede estar vacÌa");
         }
     }
 
@@ -105,5 +105,36 @@ public class Docente {
 
     public String getCatCientif() {
         return catCientif;
+    }
+    
+    public float getSalario(){
+    	float salario = salarioBase;
+    	
+    	if(catDoc.equalsIgnoreCase("Titular")){
+    		salario += 500;
+    	}
+    	else if(catDoc.equalsIgnoreCase("Auxiliar")){
+    		salario+=400;
+    	}
+    	else if(catDoc.equalsIgnoreCase("Asistente")){
+    		salario+=300;
+    	}
+    	else if(catDoc.equalsIgnoreCase("Instructor")){
+    		salario+=200;
+    	}
+    	else if(catDoc.equalsIgnoreCase("ATD")){
+    		salario+=100;
+    	}
+    	
+    	if(catCientif.equalsIgnoreCase("Doctor")){
+    		salario += 500;
+    	}
+    	else if(catCientif.equalsIgnoreCase("M·ster")){
+    		salario += 300;
+    	}
+    	
+    	salario += 200 * antiguedad;
+    	
+    	return salario;
     }
 }
