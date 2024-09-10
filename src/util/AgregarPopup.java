@@ -7,6 +7,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -24,6 +25,7 @@ public class AgregarPopup extends JDialog {
 	private JLabel label;
 
 	public AgregarPopup() {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		getContentPane().setForeground(new Color(0, 0, 0));
 		setType(Type.POPUP);
 		setModalityType(ModalityType.APPLICATION_MODAL);

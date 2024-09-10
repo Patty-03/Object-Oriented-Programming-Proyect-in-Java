@@ -65,7 +65,10 @@ public class CrearProfesor extends JDialog{
 	
 	private Validaciones validaciones;
 	
+	
+	
 	public CrearProfesor(Principal p, final Dpto dpto) {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		buttonGroup = new ButtonGroup();
 		validaciones = new Validaciones();
 		getContentPane().setForeground(new Color(0, 0, 0));
@@ -157,7 +160,7 @@ public class CrearProfesor extends JDialog{
 		getContentPane().add(lblDatosProfesionales);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 654, 43);
 		getContentPane().add(panel);

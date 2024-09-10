@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -78,6 +79,7 @@ public class CrearPlanif extends JDialog {
 
 
 	public CrearPlanif(final Principal ppal, final Dpto dpto) {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setUndecorated(true);
 		setBounds(new Rectangle(0, 0, 530, 412));
 		getContentPane().setLayout(null);
@@ -142,7 +144,7 @@ public class CrearPlanif extends JDialog {
 		}
 		comboBoxAsig.setModel(new DefaultComboBoxModel<>(array));
 
-		lblTipoDeEnseanza = new JLabel("TIPO DE ENSEÑANZA");
+		lblTipoDeEnseanza = new JLabel("TIPO DE ENSEï¿½ANZA");
 		lblTipoDeEnseanza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTipoDeEnseanza.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblTipoDeEnseanza.setBounds(275, 76, 243, 16);
@@ -197,7 +199,7 @@ public class CrearPlanif extends JDialog {
 		getContentPane().add(button);
 
 		panel = new JPanel();
-		panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 530, 43);
 		getContentPane().add(panel);
@@ -264,7 +266,7 @@ public class CrearPlanif extends JDialog {
 		}
 		comboBoxEnsenanza.setModel(new DefaultComboBoxModel<>(arrayE));
 
-		lblEnseanza = new JLabel("ENSEÑANZA");
+		lblEnseanza = new JLabel("ENSEï¿½ANZA");
 		lblEnseanza.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblEnseanza.setBounds(285, 351, 116, 16);
 		getContentPane().add(lblEnseanza);

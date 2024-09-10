@@ -12,6 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +42,7 @@ public class CrearAsignacion extends JDialog {
 	private Principal p;
 
 	public CrearAsignacion(final Principal ppal, final Dpto d) {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
@@ -54,7 +56,7 @@ public class CrearAsignacion extends JDialog {
 		p = ppal;
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		panel.setBounds(0, 0, 600, 43);
 		contentPanel.add(panel);
 		panel.setLayout(null);
