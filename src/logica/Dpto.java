@@ -262,4 +262,15 @@ public class Dpto {
     	
     	return horas;
     }
+    
+    public ArrayList<String> filtrarEnsenanzasPorAsig(String asig){
+    	ArrayList<String> valores = new ArrayList<String>();
+		int a = buscarAsign(asig);
+
+		for(TipoEnsenanza t: getAsignaturas().get(a).getEnsenanzas()){
+			valores.add(t.getNombre());
+		}
+		
+		return valores;
+    }
 }

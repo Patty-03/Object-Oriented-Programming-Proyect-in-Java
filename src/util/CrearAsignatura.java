@@ -24,13 +24,12 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import logica.Asignatura;
 import logica.Dpto;
 import logica.TipoEnsenanza;
 import modelos.AsignaturasTableModel;
-import javax.swing.border.LineBorder;
 
 public class CrearAsignatura extends JDialog {
 	private static final long serialVersionUID = 1L;

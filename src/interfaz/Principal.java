@@ -38,6 +38,7 @@ import modelos.PlanificacionesTableModel;
 import modelos.ProfesoresTableModel;
 import util.AyudaPopUp;
 import util.CerrarSesion;
+import util.CrearAsignacion;
 import util.CrearAsignatura;
 import util.CrearPlanif;
 import util.CrearProfesor;
@@ -432,6 +433,19 @@ public class Principal extends JFrame {
 		mntmBorrar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mntmBorrar.setBorder(null);
 		mnMenu.add(mntmBorrar);
+		
+		JMenuItem mntmNuevaASig = new JMenuItem("Nueva Asignacion");
+		mntmNuevaASig.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearAsignacion asignacionDialog = new CrearAsignacion(Principal.this, dpto);
+				asignacionDialog.setLocation(600,300);
+				asignacionDialog.setVisible(true);
+				tabla.setModel(as1);
+			}
+		});
+		mntmNuevaASig.setForeground(Color.DARK_GRAY);
+		mntmNuevaASig.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		mnMenu.add(mntmNuevaASig);
 
 		JMenu mnListar = new JMenu("Listar");
 		mnListar.setForeground(Color.DARK_GRAY);
