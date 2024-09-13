@@ -78,10 +78,12 @@ public class CrearAsignatura extends JDialog {
 	private JComboBox<Object> comboBoxSemestre;
 	private JButton button;
 	private AsignaturasTableModel a1;
+	private Validaciones validaciones;
 
 
 	@SuppressWarnings("rawtypes")
 	public CrearAsignatura(Principal p, final Dpto dpto) {
+		validaciones = new Validaciones();
 		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setType(Type.UTILITY);
@@ -130,6 +132,7 @@ public class CrearAsignatura extends JDialog {
 
 		comboBoxPlanEstudio = new JComboBox<String>();
 		comboBoxPlanEstudio.setModel(new DefaultComboBoxModel(new Character[] {'A', 'B', 'C', 'D', 'E'}));
+		comboBoxPlanEstudio.setSelectedItem('E');
 		comboBoxPlanEstudio.setBounds(208, 259, 65, 22);
 		contentPanel.add(comboBoxPlanEstudio);
 
@@ -313,9 +316,13 @@ public class CrearAsignatura extends JDialog {
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (validaciones.validarVacio(textFieldNombre, "Nombre") && 
+	                    validaciones.contieneNumeros(textFieldNombre, "Nombre") &&
+	                	validaciones.validarVacio(textFieldDisciplina, "Disciplina") &&
+	                	validaciones.contieneNumeros(textFieldDisciplina, "Disciplina")){
 				a1 = crearAsignatura(dpto);
 				JOptionPane.showMessageDialog(CrearAsignatura.this, "Asignatura agregada de manera satisfactoria");
-				dispose();
+				dispose();}
 			}
 		});
 		button_1.setIcon(new ImageIcon(CrearAsignatura.class.getResource("/imagenes/Button.png")));
@@ -336,51 +343,58 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(comboBoxSemestre);
 	}
 	
-	public AsignaturasTableModel crearAsignatura(Dpto dpto){
-		String nombre, disciplina, carrera, evFinal;
-		char planEstudio;
-		int anio;
-		int semestre;
+	public AsignaturasTableModel crearAsignatura(Dpto dpto) {
+	    String nombre, disciplina, carrera, evFinal;
+	    char planEstudio;
+	    int anio;
+	    int semestre;
 
-		nombre = textFieldNombre.getText();
-		disciplina = textFieldDisciplina.getText();
-		planEstudio = (char) comboBoxPlanEstudio.getSelectedItem();
-		carrera = (String) comboboxCarrera.getSelectedItem();
-		evFinal = (String) comboBoxEvFinal.getSelectedItem();
-		anio = (int) comboBoxAnio.getSelectedItem();
-		semestre = (int)comboBoxSemestre.getSelectedItem();
+	    nombre = textFieldNombre.getText().trim().toLowerCase();  
+	    disciplina = textFieldDisciplina.getText().trim();
+	    planEstudio = (char) comboBoxPlanEstudio.getSelectedItem();
+	    carrera = (String) comboboxCarrera.getSelectedItem();
+	    evFinal = (String) comboBoxEvFinal.getSelectedItem();
+	    anio = (int) comboBoxAnio.getSelectedItem();
+	    semestre = (int) comboBoxSemestre.getSelectedItem();
 
-		ArrayList<TipoEnsenanza> tipos = new ArrayList<TipoEnsenanza>();
 
-		if(checkBoxConf.isSelected()){
-			TipoEnsenanza t1 = new TipoEnsenanza("Conferencia", (int) spinnerConf.getValue()); 
-			tipos.add(t1);
-		}
+	    for (Asignatura asignatura : dpto.getAsignaturas()) {
+	        if (asignatura.getNombre().trim().toLowerCase().equals(nombre)) { 
+	            JOptionPane.showMessageDialog(CrearAsignatura.this, "Ya existe una asignatura con el nombre ingresado.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return null;
+	        }
+	    }
 
-		if(checkBoxCP.isSelected()){
-			TipoEnsenanza t2 = new TipoEnsenanza("Clase Practica", (int) spinnerCP.getValue()); 
-			tipos.add(t2);
-		}
+	    ArrayList<TipoEnsenanza> tipos = new ArrayList<TipoEnsenanza>();
 
-		if(checkBoxLab.isSelected()){
-			TipoEnsenanza t3 = new TipoEnsenanza("Laboratorio", (int) spinnerLab.getValue()); 
-			tipos.add(t3);
-		}
+	    if (checkBoxConf.isSelected()) {
+	        TipoEnsenanza t1 = new TipoEnsenanza("Conferencia", (int) spinnerConf.getValue());
+	        tipos.add(t1);
+	    }
 
-		if(checkBoxSem.isSelected()){
-			TipoEnsenanza t3 = new TipoEnsenanza("Seminario", (int) spinnerSem.getValue()); 
-			tipos.add(t3);
-		}
+	    if (checkBoxCP.isSelected()) {
+	        TipoEnsenanza t2 = new TipoEnsenanza("Clase Practica", (int) spinnerCP.getValue());
+	        tipos.add(t2);
+	    }
 
-		if(checkBoxTaller.isSelected()){
-			TipoEnsenanza t3 = new TipoEnsenanza("Taller", (int) spinnerTaller.getValue()); 
-			tipos.add(t3);
-		}
+	    if (checkBoxLab.isSelected()) {
+	        TipoEnsenanza t3 = new TipoEnsenanza("Laboratorio", (int) spinnerLab.getValue());
+	        tipos.add(t3);
+	    }
 
-		dpto.agregarAsignatura(new Asignatura(nombre, disciplina, planEstudio, 
-				semestre, carrera, anio, evFinal, tipos));
-		a1 = pPrincipal.getAsignaturasTableModel();
-		a1.adicionar(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal);
-		return a1;
+	    if (checkBoxSem.isSelected()) {
+	        TipoEnsenanza t4 = new TipoEnsenanza("Seminario", (int) spinnerSem.getValue());
+	        tipos.add(t4);
+	    }
+
+	    if (checkBoxTaller.isSelected()) {
+	        TipoEnsenanza t5 = new TipoEnsenanza("Taller", (int) spinnerTaller.getValue());
+	        tipos.add(t5);
+	    }
+
+	    dpto.agregarAsignatura(new Asignatura(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal, tipos));
+	    a1 = pPrincipal.getAsignaturasTableModel();
+	    a1.adicionar(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal);
+	    return a1;
 	}
 }

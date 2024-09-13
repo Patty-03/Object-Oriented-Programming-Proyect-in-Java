@@ -29,7 +29,7 @@ public class Dpto {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("El nombre del departamento no puede estar vacío.");
+            throw new IllegalArgumentException("El nombre del departamento no puede estar vacï¿½o.");
         }
     }
 
@@ -37,7 +37,7 @@ public class Dpto {
         if (facultad != null && !facultad.trim().isEmpty()) {
             this.facultad = facultad;
         } else {
-            throw new IllegalArgumentException("El nombre de la facultad no puede estar vacío.");
+            throw new IllegalArgumentException("El nombre de la facultad no puede estar vacï¿½o.");
         }
     }
 
@@ -45,7 +45,7 @@ public class Dpto {
         if (nombreJefeDpto != null && !nombreJefeDpto.trim().isEmpty()) {
             this.nombreJefeDpto = nombreJefeDpto;
         } else {
-            throw new IllegalArgumentException("El nombre del jefe de departamento no puede estar vacíos.");
+            throw new IllegalArgumentException("El nombre del jefe de departamento no puede estar vacï¿½os.");
         }
     }
 
@@ -273,5 +273,31 @@ public class Dpto {
 		
 		return valores;
     }
+    
+    public boolean existeProfesorConCI(String ci) {
+        for (Docente docente : this.getDocentes()) {
+            if (docente.getiD().equals(ci)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean existePlanificacion(String profesor, String asignatura, String tipoEnsenanza, int grupo, int curso, int semestre) {
+        for (Planificacion plan : this.getRegistro()) {
+            AsigPorProf asignacion = plan.getAsignacion();
+            if (asignacion.getNombreProf().equalsIgnoreCase(profesor) &&
+                asignacion.getAsignatura().equalsIgnoreCase(asignatura) &&
+                asignacion.getTipoEnsenanza().equalsIgnoreCase(tipoEnsenanza) &&
+                asignacion.getGrupo() == grupo &&
+                plan.getCurso() == curso &&
+                plan.getSemestre() == semestre) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
 
 }

@@ -604,7 +604,7 @@ public class Principal extends JFrame {
 		mntmDocentePorAsignatura.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmDocentePorAsignatura);
 
-		JMenuItem mntmDocentesConMs = new JMenuItem("Docentes con más de 12h");
+		JMenuItem mntmDocentesConMs = new JMenuItem("Docentes con mï¿½s de 12h");
 		mntmDocentesConMs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

@@ -9,13 +9,13 @@ public class ProfPorAsigTableModel extends DefaultTableModel{
 
 	public ProfPorAsigTableModel(){
 		String[] columnNames = {
-				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. Científica"};
+				"Nombre", "CI", "Aï¿½os de trabajo", "Cat. Docente", "Cat. Cientï¿½fica"};
 		this.setColumnIdentifiers(columnNames);
 	}
 	
 	public ProfPorAsigTableModel(Docente [] profesores){
 		String[] columnNames = {
-				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. Científica"};
+				"Nombre", "CI", "Aï¿½os de trabajo", "Cat. Docente", "Cat. Cientï¿½fica"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < profesores.length; i++) {
 			Object[] newRow = new Object[]{profesores[i].getNombre(), profesores[i].getiD(), 
@@ -23,5 +23,9 @@ public class ProfPorAsigTableModel extends DefaultTableModel{
 			addRow(newRow);
 		}
 	}
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
 	
 }

@@ -195,17 +195,30 @@ public class CrearProfesor extends JDialog{
 		button_1 = new JButton("");
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (validaciones.validarVacio(textFieldNombre, "Nombre") && 
-                    validaciones.contieneNumeros(textFieldNombre, "Nombre") &&
-                	validaciones.validarCI(textFieldCI) &&
-                	validaciones.validarSeleccion(comboBoxCatCientif, getName()) &&
-                	validaciones.validarSeleccion(comboBoxCatDoc, getName())){
-                    p1 = crearProfesor(dpto);
-                    JOptionPane.showMessageDialog(CrearProfesor.this, "Profesor agregado de manera satisfactoria");
-                    dispose();
-                }
-	        }
+		    public void actionPerformed(ActionEvent e) {
+		        String ci = textFieldCI.getText();
+
+		        if (validaciones.validarVacio(textFieldNombre, "Nombre") && 
+		            validaciones.contieneNumeros(textFieldNombre, "Nombre") &&
+		            validaciones.validarCI(textFieldCI) &&
+		            validaciones.validarSeleccion(comboBoxCatCientif, "Categoría Científica") &&
+		            validaciones.validarSeleccion(comboBoxCatDoc, "Categoría Docente")) {
+		        	
+		            if (dpto.existeProfesorConCI(ci)) {
+		                JOptionPane.showMessageDialog(CrearProfesor.this, 
+		                    "Ya existe un profesor con este número de CI.",
+		                    "CI Duplicado",
+		                    JOptionPane.WARNING_MESSAGE);
+		            } else {
+		                p1 = crearProfesor(dpto);
+		                JOptionPane.showMessageDialog(CrearProfesor.this, 
+		                    "Profesor agregado de manera satisfactoria.",
+		                    "Éxito",
+		                    JOptionPane.INFORMATION_MESSAGE);
+		                dispose();
+		            }
+		        }
+		    }
 		});
 		button_1.setIcon(new ImageIcon(CrearProfesor.class.getResource("/imagenes/Button.png")));
 		button_1.setContentAreaFilled(false);
@@ -257,36 +270,32 @@ public class CrearProfesor extends JDialog{
 	}
 	
 	
-	public ProfesoresTableModel crearProfesor(Dpto dpto){
-	    String nombre, iD, disponibilidad, catDoc, catCientif;
-	    int antiguedad;
-	    float salarioBase;
+	public ProfesoresTableModel crearProfesor(Dpto dpto) {
+	    String nombre = textFieldNombre.getText();
+	    String iD = textFieldCI.getText();
+	    String disponibilidad = (String) comboBoxDisp.getSelectedItem();
+	    String catDoc = (String) comboBoxCatDoc.getSelectedItem();
+	    String catCientif = (String) comboBoxCatCientif.getSelectedItem();
+	    int antiguedad = (int) spinnerAntiguedad.getValue();
+	    float salarioBase = (float) spinnerSalario.getValue();
 	    boolean isAdiestrado = false;
 	    boolean autorizacion = true;
 
-	    nombre = textFieldNombre.getText();
-	    iD = textFieldCI.getText();
-
-	    disponibilidad = (String) comboBoxDisp.getSelectedItem();
-	    catDoc = (String) comboBoxCatDoc.getSelectedItem();
-	    catCientif = (String) comboBoxCatCientif.getSelectedItem();
-	    antiguedad = (int) spinnerAntiguedad.getValue();
-	    salarioBase =  (float) spinnerSalario.getValue();
-	    
-	    if(buttonGroup.getSelection() == noAutorizado) {
-	    	autorizacion = false;
+	    if (buttonGroup.getSelection() == noAutorizado) {
+	        autorizacion = false;
 	    }
-	    
-	    if(catDoc.equals("Adiestrado")){
+
+	    if (catDoc.equals("Adiestrado")) {
 	        isAdiestrado = true;
 	        dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, autorizacion));
 	    } else {
 	        dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
 	    }
-	    
+
 	    p1 = ppal.getProfesoresTableModel();
 	    p1.adicionar(nombre, iD, disponibilidad, antiguedad, catDoc, catCientif, autorizacion);
 	    return p1;
 	}
+
 
 }

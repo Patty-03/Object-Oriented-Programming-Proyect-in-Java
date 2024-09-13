@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
@@ -72,8 +73,31 @@ public class CrearPlanif extends JDialog {
 	private JLabel lblEnseanza;
 	private JDateChooser dateChooser;
 
+		
+	private ArrayList<String> obtenerProfesoresValidos(Dpto dpto) {
+	    ArrayList<String> profesoresValidos = new ArrayList<>();
+	    
+	    for (AsigPorProf asignacion : dpto.getAsignacionesAsignaturas()) {
+	        String nombreProf = asignacion.getNombreProf();
+	        int totalHoras = 0;
+
+	        for (AsigPorProf asig : dpto.getAsignacionesAsignaturas()) {
+	            if (asig.getNombreProf().equals(nombreProf)) {
+	                totalHoras += asig.getHorasClase();
+	            }
+	        }
+
+	        if (totalHoras < 12 && !profesoresValidos.contains(nombreProf)) {
+	            profesoresValidos.add(nombreProf);
+	        }
+	    }
+
+	    return profesoresValidos;
+	}
 
 	public CrearPlanif(final Principal ppal, final Dpto dpto) {
+
+		
 		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setUndecorated(true);
 		setBounds(new Rectangle(0, 0, 530, 412));
@@ -109,14 +133,12 @@ public class CrearPlanif extends JDialog {
 		lblProfesor.setBounds(22, 163, 183, 16);
 		getContentPane().add(lblProfesor);
 
+		
 		comboBoxProf = new JComboBox();
 		comboBoxProf.setBounds(139, 163, 110, 22);
 		getContentPane().add(comboBoxProf);
-		String[]arrayprof = new String[dpto.getAsignacionesAsignaturas().size()];
-		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
-			arrayprof[i] =	dpto.getAsignacionesAsignaturas().get(i).getNombreProf();
-		}
-		comboBoxProf.setModel(new DefaultComboBoxModel<>(arrayprof));
+	    ArrayList<String> profesoresValidos = obtenerProfesoresValidos(dpto);
+	    comboBoxProf.setModel(new DefaultComboBoxModel<>(profesoresValidos.toArray(new String[0])));
 
 		lblAsignatura = new JLabel("ASIGNATURA");
 		lblAsignatura.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -200,11 +222,33 @@ public class CrearPlanif extends JDialog {
 		panel.add(lblAgregarPlanificaciones);
 
 		button_1 = new JButton("X");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
+		button.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        int horas, grupo, semestre, curso;
+		        String asig, tipoE, nombreProf;
+
+		        horas = (int) spinner.getValue();
+		        grupo = Integer.parseInt((String) comboBoxGrupo.getSelectedItem());
+		        semestre = Integer.parseInt((String) comboBoxSemestre.getSelectedItem());
+		        Date fecha = dateChooser.getDate();
+		        asig = (String) comboBoxAsig.getSelectedItem();
+		        tipoE = (String) comboBoxEnsenanza.getSelectedItem();
+		        nombreProf = (String) comboBoxProf.getSelectedItem();
+		        curso = Integer.parseInt((String) comboBoxCurso.getSelectedItem());
+		        AsigPorProf a = new AsigPorProf(horas, asig, tipoE, nombreProf, grupo);
+
+		        if (dpto.existePlanificacion(nombreProf, asig, tipoE, grupo, curso, semestre)) {
+		            JOptionPane.showMessageDialog(CrearPlanif.this, "Ya existe una planificación con los mismos datos.", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        dpto.agregarPlanif(new Planificacion(fecha, curso, semestre, a));
+		        JOptionPane.showMessageDialog(CrearPlanif.this, "Planificación agregada al registro de manera satisfactoria");
+		        ppal.cargarTablaPlanif();
+		        dispose();
+		    }
 		});
+
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.setToolTipText("Salir");
 		button_1.setForeground(Color.BLACK);
@@ -262,8 +306,10 @@ public class CrearPlanif extends JDialog {
 		
 		dateChooser = new JDateChooser();
 		dateChooser.setBounds(144, 267, 105, 22);
+		dateChooser.setDate(new Date()); 
+		dateChooser.setEnabled(false);  
 		getContentPane().add(dateChooser);
-
+		
 	}
 }
 
