@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,13 +25,12 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import logica.Asignatura;
 import logica.Dpto;
 import logica.TipoEnsenanza;
 import modelos.AsignaturasTableModel;
-import javax.swing.border.LineBorder;
 
 public class CrearAsignatura extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -82,6 +82,7 @@ public class CrearAsignatura extends JDialog {
 
 	@SuppressWarnings("rawtypes")
 	public CrearAsignatura(Principal p, final Dpto dpto) {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setType(Type.UTILITY);
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -280,7 +281,7 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(spinnerSem);
 
 		panel = new JPanel();
-		panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		panel.setBounds(0, 0, 705, 43);
 		contentPanel.add(panel);
 		panel.setLayout(null);

@@ -29,7 +29,7 @@ public class Login extends JFrame {
 	private JButton btnNewButton;
 	private JButton btnCancelar;
 	private JLabel lblNombreDeUsuario;
-	private JLabel lblContrasea;
+	private JLabel lblContrasenna;
 	private JLabel lblNewLabel_1;
 	private Autenticacion a1; 
 	private LoginCorrecto lc1;
@@ -123,11 +123,11 @@ public class Login extends JFrame {
 		separator_1.setBounds(487, 411, 445, 7);
 		contentPane.add(separator_1);
 		
-		lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setForeground(Color.DARK_GRAY);
-		lblContrasea.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblContrasea.setBounds(487, 354, 314, 22);
-		contentPane.add(lblContrasea);
+		lblContrasenna = new JLabel("Contrase\u00F1a");
+		lblContrasenna.setForeground(Color.DARK_GRAY);
+		lblContrasenna.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblContrasenna.setBounds(487, 354, 314, 22);
+		contentPane.add(lblContrasenna);
 		
 		lblNombreDeUsuario = new JLabel("Nombre de usuario");
 		lblNombreDeUsuario.setForeground(Color.DARK_GRAY);

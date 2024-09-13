@@ -8,23 +8,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logica.AsigPorProf;
 import logica.Asignatura;
 import logica.Docente;
 import logica.Dpto;
 import modelos.AsigPorDisciplinaTableModel;
+import modelos.AsigPorProfTableModel;
+import modelos.ProfPorAsigTableModel;
 import modelos.ProfPorDispTableModel;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 
 public class ReportesPopup extends JDialog {
@@ -37,6 +44,7 @@ public class ReportesPopup extends JDialog {
 	private MostrarReportesPopup rep;
 
 	public ReportesPopup(Principal p, final Dpto d) {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setType(Type.POPUP);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
@@ -45,7 +53,7 @@ public class ReportesPopup extends JDialog {
 		setUndecorated(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
@@ -164,22 +172,83 @@ public class ReportesPopup extends JDialog {
 		if(codigo.equals("AsigPorDisciplinaTableModel")){
 			tableModel = crearablaAsigPorDisciplina(d);
 			titulo = "Asignaturas Por Disciplina";
+			rep.recibirInfo(titulo, tableModel);
+			rep.setVisible(true);
+			rep.setLocationRelativeTo(null);
 		}
 		else if(codigo.equals("ProfPorDisponibTableModel")){
 			tableModel = crearablaProfPorDisp(d);
 			titulo = "Profesores por Disponibilidad";
+			rep.recibirInfo(titulo, tableModel);
+			rep.setVisible(true);
+			rep.setLocationRelativeTo(null);
 		}
 		else if(codigo.equals("ProfPorCatDocTableModel")){
 			tableModel = crearablaProfPorCatDoc(d);
 			titulo = "Profesores por Cat. Docente";
+			rep.recibirInfo(titulo, tableModel);
+			rep.setVisible(true);
+			rep.setLocationRelativeTo(null);
 		}
 		else if(codigo.equals("ProfporCatCientif")){
 			tableModel = crearablaProfPorCatCientif(d);
 			titulo = "Profesores por Cat. Cientifica";
+			rep.recibirInfo(titulo, tableModel);
+			rep.setVisible(true);
+			rep.setLocationRelativeTo(null);
 		}
+		else if(codigo.equals("CalcSalario")){
+			float salario = d.getDocentes().get(d.buscarProfesor((String)comboBox.getSelectedItem())).getSalario();
+			JOptionPane.showMessageDialog(this, "El salario del profesor es: " + salario);
+		}
+		else if(codigo.equals("DocPorAsig")){
+			tableModel = crearablaProfPorAsig(d);
+			titulo = "Profesores por Asignatura";
+			rep.recibirInfo(titulo, tableModel);
+			rep.setVisible(true);
+			rep.setLocationRelativeTo(null);
+		}
+		else if(codigo.equals("AsigPorDoc")){
+			tableModel = crearAsigPorProf(d);
+			titulo = "Asignaturas por profesores";
+			rep.recibirInfo(titulo, tableModel);
+			rep.setVisible(true);
+			rep.setLocationRelativeTo(null);
+		}
+	}
+	
+	public ProfPorAsigTableModel crearablaProfPorAsig(Dpto d){
+		String disp = (String) comboBox.getSelectedItem();
+		ArrayList<Docente> prof = d.buscarProfPorAsig(disp);
 		
-		rep.recibirInfo(titulo, tableModel);
-		rep.setVisible(true);
-		rep.setLocationRelativeTo(null);
+		Docente[] valores = new Docente[prof.size()];
+		
+		int i = 0;
+		
+		for(Docente a: prof){
+			valores[i] = a;
+			i++;
+		}
+		ProfPorAsigTableModel tableModel = new ProfPorAsigTableModel(valores);
+		
+		return tableModel;
+	}
+	
+	public AsigPorProfTableModel crearAsigPorProf(Dpto d){
+		String disp = (String) comboBox.getSelectedItem();
+		ArrayList<Asignatura> asig = d.buscarAsigPorProf(disp);
+		
+		Asignatura[] valores = new Asignatura[asig.size()];
+		
+		int i = 0;
+		
+		for(Asignatura a: asig){
+			valores[i] = a;
+			i++;
+		}
+		AsigPorProfTableModel tableModel = new AsigPorProfTableModel(valores, d, 
+				(String) comboBox.getSelectedItem());
+		
+		return tableModel;
 	}
 }

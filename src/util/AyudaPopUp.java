@@ -6,36 +6,41 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class AyudaPopUp extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel;
+	private JButton button;
 
 	public AyudaPopUp() {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
 		setType(Type.POPUP);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 450, 40);
-		panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		JButton button = new JButton("X");
+		button = new JButton("X");
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -64,6 +69,7 @@ public class AyudaPopUp extends JDialog {
 		contentPanel.add(lblNewLabel);
 		
 		JButton button_1 = new JButton("");
+		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

@@ -27,7 +27,7 @@ public class PantallaDeCarga extends JFrame {
 	
 	void iniciarProgreso(Dpto dpto){
 		l1 = new Login(dpto);
-		int duracion = 5000;
+		int duracion = 2000;
 		int intervalo = 50;
 		final int incremento = Math.max(1, (100 * intervalo)/duracion);
 		Timer tiempo = new Timer(intervalo, new ActionListener() {

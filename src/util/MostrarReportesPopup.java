@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 import java.awt.Color;
@@ -32,6 +33,7 @@ public class MostrarReportesPopup extends JDialog {
 	private JButton button;
 
 	public MostrarReportesPopup() {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setType(Type.POPUP);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
@@ -39,7 +41,7 @@ public class MostrarReportesPopup extends JDialog {
 		setUndecorated(true);
 		setBounds(100, 100, 630, 500);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		//contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);

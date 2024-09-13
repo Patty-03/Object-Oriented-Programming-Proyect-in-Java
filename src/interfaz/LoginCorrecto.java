@@ -62,7 +62,7 @@ public class LoginCorrecto extends JDialog {
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.setOpaque(false);
 		button.setFocusPainted(false);
-		button.setSelectedIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\AcceptPressedButton.png"));
+		//button.setSelectedIcon(new ImageIcon("/imagenes/AcceptPressedButton.png"));
 		button.setContentAreaFilled(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,7 +83,7 @@ public class LoginCorrecto extends JDialog {
 		
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 300, 400);
-		label.setIcon(new ImageIcon("C:\\Users\\admin\\Downloads\\Dise\u00F1o sin t\u00EDtulo (1).png"));
+		label.setIcon(new ImageIcon(LoginCorrecto.class.getResource("/imagenes/loginCorrecto.png")));
 		contentPanel.add(label);
 	}
 }
