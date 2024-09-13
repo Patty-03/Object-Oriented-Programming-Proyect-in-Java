@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,6 +36,7 @@ import logica.Planificacion;
 import modelos.AsignacionesTableModel;
 import modelos.AsignaturasTableModel;
 import modelos.PlanificacionesTableModel;
+import modelos.ProfMas12Horas;
 import modelos.ProfesoresTableModel;
 import util.AyudaPopUp;
 import util.CerrarSesion;
@@ -42,7 +44,9 @@ import util.CrearAsignacion;
 import util.CrearAsignatura;
 import util.CrearPlanif;
 import util.CrearProfesor;
+import util.EditarDatosDpto;
 import util.InfoDialog;
+import util.MostrarReportesPopup;
 import util.ReportesPopup;
 
 public class Principal extends JFrame {
@@ -87,10 +91,13 @@ public class Principal extends JFrame {
 	private AsignacionesTableModel as1;
 	private AsignaturasTableModel a1;
 	private PlanificacionesTableModel pl1;
+	private JMenuItem mntmEditarDatosDpto;
+	private EditarDatosDpto ed1;
 
 
 
 	public Principal(final Dpto dpto) {
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setTitle("Dpto. " + dpto.getNombre());
 		setBackground(Color.WHITE);
 		setResizable(false);
@@ -106,6 +113,7 @@ public class Principal extends JFrame {
 		panelCerrarSesion = new CerrarSesion(dpto);
 		d = dpto;
 		popupReportes = new ReportesPopup(this, d);
+		ed1 = new EditarDatosDpto(d);
 
 
 
@@ -418,6 +426,18 @@ public class Principal extends JFrame {
 				}
 			}*/
 		}});
+		
+		mntmEditarDatosDpto = new JMenuItem("Editar Datos Dpto");
+		mntmEditarDatosDpto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ed1.ponerDatosActuales(d.getNombre(), d.getFacultad(), d.getNombreJefeDpto());
+				ed1.setVisible(true);
+				ed1.setLocationRelativeTo(null);
+			}
+		});
+		mntmEditarDatosDpto.setForeground(Color.DARK_GRAY);
+		mntmEditarDatosDpto.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		mnMenu.add(mntmEditarDatosDpto);
 		mntmEditar.setForeground(Color.DARK_GRAY);
 		mntmEditar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mntmEditar.setBorder(null);
@@ -584,7 +604,11 @@ public class Principal extends JFrame {
 		mntmDocentePorAsignatura.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmDocentePorAsignatura);
 
-		JMenuItem mntmDocentesConMs = new JMenuItem("Docentes con m\u00E1s de 12h");
+		JMenuItem mntmDocentesConMs = new JMenuItem("Docentes con más de 12h");
+		mntmDocentesConMs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		mntmDocentesConMs.setForeground(Color.DARK_GRAY);
 		mntmDocentesConMs.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmDocentesConMs);

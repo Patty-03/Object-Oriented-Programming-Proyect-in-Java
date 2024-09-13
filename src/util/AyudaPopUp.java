@@ -13,11 +13,13 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class AyudaPopUp extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel;
+	private JButton button;
 
 	public AyudaPopUp() {
 		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
@@ -37,7 +39,8 @@ public class AyudaPopUp extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		JButton button = new JButton("X");
+		button = new JButton("X");
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -66,6 +69,7 @@ public class AyudaPopUp extends JDialog {
 		contentPanel.add(lblNewLabel);
 		
 		JButton button_1 = new JButton("");
+		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

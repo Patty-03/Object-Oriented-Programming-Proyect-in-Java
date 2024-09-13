@@ -47,11 +47,6 @@ public class CrearPlanif extends JDialog {
 	private JComboBox comboBoxProf;
 	private JLabel lblAsignatura;
 	private JComboBox comboBoxAsig;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
 	private JLabel lblTipoDeEnseanza;
 	private JLabel lblGrupos;
 	private JSeparator separator_2;
@@ -89,7 +84,7 @@ public class CrearPlanif extends JDialog {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setForeground(Color.LIGHT_GRAY);
 		separator.setBackground(Color.LIGHT_GRAY);
-		separator.setBounds(261, 74, 2, 305);
+		separator.setBounds(261, 74, 2, 240);
 		getContentPane().add(separator);
 		setLocationRelativeTo(null);
 
@@ -117,18 +112,11 @@ public class CrearPlanif extends JDialog {
 		comboBoxProf = new JComboBox();
 		comboBoxProf.setBounds(139, 163, 110, 22);
 		getContentPane().add(comboBoxProf);
-		String[] arrayprof = new String[dpto.getAsignacionesAsignaturas().size()];
-        int count = 0;
-        for (int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++) {
-            AsigPorProf asignacion = dpto.getAsignacionesAsignaturas().get(i);
-            if (asignacion.getHorasClase() < 12) {
-                arrayprof[count] = asignacion.getNombreProf();
-                count++;
-        }
-        String[] profesoresFiltrados = new String[count];
-        System.arraycopy(arrayprof, 0, profesoresFiltrados, 0, count);
-            
-        comboBoxProf.setModel(new DefaultComboBoxModel<>(profesoresFiltrados));
+		String[]arrayprof = new String[dpto.getAsignacionesAsignaturas().size()];
+		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
+			arrayprof[i] =	dpto.getAsignacionesAsignaturas().get(i).getNombreProf();
+		}
+		comboBoxProf.setModel(new DefaultComboBoxModel<>(arrayprof));
 
 		lblAsignatura = new JLabel("ASIGNATURA");
 		lblAsignatura.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -139,12 +127,13 @@ public class CrearPlanif extends JDialog {
 		comboBoxAsig.setBounds(139, 220, 110, 22);
 		getContentPane().add(comboBoxAsig);
 		String[]array = new String[dpto.getAsignacionesAsignaturas().size()];
-		for(i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
+		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
 			array[i] =	dpto.getAsignacionesAsignaturas().get(i).getAsignatura();
 		}
 		comboBoxAsig.setModel(new DefaultComboBoxModel<>(array));
+		
 
-		lblTipoDeEnseanza = new JLabel("TIPO DE ENSE�ANZA");
+		lblTipoDeEnseanza = new JLabel("TIPO DE ENSE\u00D1ANZA");
 		lblTipoDeEnseanza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTipoDeEnseanza.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblTipoDeEnseanza.setBounds(275, 76, 243, 16);
@@ -152,7 +141,7 @@ public class CrearPlanif extends JDialog {
 
 		lblGrupos = new JLabel("GRUPO");
 		lblGrupos.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblGrupos.setBounds(22, 358, 116, 16);
+		lblGrupos.setBounds(291, 266, 116, 16);
 		getContentPane().add(lblGrupos);
 
 		separator_2 = new JSeparator();
@@ -199,7 +188,7 @@ public class CrearPlanif extends JDialog {
 		getContentPane().add(button);
 
 		panel = new JPanel();
-		//panel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
+		panel.setBorder(null);
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 530, 43);
 		getContentPane().add(panel);
@@ -225,7 +214,7 @@ public class CrearPlanif extends JDialog {
 		button_1.setBorder(null);
 		button_1.setBackground(Color.GRAY);
 		button_1.setBounds(482, -1, 48, 40);
-		panel.add(button_1);		
+		panel.add(button_1);
 
 		JLabel lblFecha = new JLabel("FECHA");
 		lblFecha.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -233,42 +222,42 @@ public class CrearPlanif extends JDialog {
 		getContentPane().add(lblFecha);
 		lblHoras = new JLabel("HORAS");
 		lblHoras.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblHoras.setBounds(22, 313, 116, 16);
+		lblHoras.setBounds(291, 221, 116, 16);
 		getContentPane().add(lblHoras);
 
 		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 30, 1));
-		spinner.setBounds(184, 303, 65, 22);
+		spinner.setBounds(453, 211, 65, 22);
 		getContentPane().add(spinner);
 
 		JLabel lblCurso = new JLabel("CURSO");
 		lblCurso.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblCurso.setBounds(285, 307, 183, 16);
+		lblCurso.setBounds(285, 115, 183, 16);
 		getContentPane().add(lblCurso);
 
 		comboBoxCurso = new JComboBox();
 		comboBoxCurso.setModel(new DefaultComboBoxModel(new String[] {"2024", "2025"}));
-		comboBoxCurso.setBounds(434, 307, 84, 22);
+		comboBoxCurso.setBounds(434, 115, 84, 22);
 		getContentPane().add(comboBoxCurso);
 
 		comboBoxGrupo = new JComboBox();
 		comboBoxGrupo.setModel(new DefaultComboBoxModel(new String[] {"11", "12", "13", "14"}));
-		comboBoxGrupo.setBounds(139, 357, 110, 22);
+		comboBoxGrupo.setBounds(408, 265, 110, 22);
 		getContentPane().add(comboBoxGrupo);
 
 		comboBoxEnsenanza = new JComboBox();
-		comboBoxEnsenanza.setBounds(413, 357, 105, 22);
+		comboBoxEnsenanza.setBounds(413, 157, 105, 22);
 		getContentPane().add(comboBoxEnsenanza);
 		
 		String[]arrayE = new String[dpto.getAsignacionesAsignaturas().size()];
-		for(i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
+		for(int i = 0; i < dpto.getAsignacionesAsignaturas().size(); i++){			
 			arrayE[i] =	dpto.getAsignacionesAsignaturas().get(i).getTipoEnsenanza();
 		}
 		comboBoxEnsenanza.setModel(new DefaultComboBoxModel<>(arrayE));
 
-		lblEnseanza = new JLabel("ENSE�ANZA");
+		lblEnseanza = new JLabel("ENSE\u00D1ANZA");
 		lblEnseanza.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblEnseanza.setBounds(285, 351, 116, 16);
+		lblEnseanza.setBounds(285, 159, 116, 16);
 		getContentPane().add(lblEnseanza);
 		
 		dateChooser = new JDateChooser();
@@ -276,6 +265,5 @@ public class CrearPlanif extends JDialog {
 		getContentPane().add(dateChooser);
 
 	}
-	}
-	}
+}
 

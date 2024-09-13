@@ -9,13 +9,13 @@ public class ProfPorAsigTableModel extends DefaultTableModel{
 
 	public ProfPorAsigTableModel(){
 		String[] columnNames = {
-				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. Cientifica"};
+				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. Científica"};
 		this.setColumnIdentifiers(columnNames);
 	}
 	
 	public ProfPorAsigTableModel(Docente [] profesores){
 		String[] columnNames = {
-				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. Cientifica"};
+				"Nombre", "CI", "Años de trabajo", "Cat. Docente", "Cat. Científica"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < profesores.length; i++) {
 			Object[] newRow = new Object[]{profesores[i].getNombre(), profesores[i].getiD(), 

@@ -12,13 +12,13 @@ public class PlanificacionesTableModel extends DefaultTableModel{
 
 	public PlanificacionesTableModel(){
 		String[] columnNames = {
-				"Fecha", "Curso", "Semestre", "Profesor", "Asignatura", "Grupo", "Horas Clase", "EnseÃ±anza"};
+				"Fecha", "Curso", "Semestre", "Profesor", "Asignatura", "Grupo", "Horas Clase", "Enseñanza"};
 		this.setColumnIdentifiers(columnNames);
 	}
 	
 	public PlanificacionesTableModel(Planificacion [] planificaciones){
 		String[] columnNames = {
-				"Fecha", "Curso", "Semestre", "Profesor", "Asignatura", "Grupo", "Horas Clase", "EnseÃ±anza"};
+				"Fecha", "Curso", "Semestre", "Profesor", "Asignatura", "Grupo", "Horas Clase", "Enseñanza"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < planificaciones.length; i++) {
 			Object[] newRow = new Object[]{

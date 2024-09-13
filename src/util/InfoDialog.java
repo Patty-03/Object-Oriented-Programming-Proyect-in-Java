@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import logica.Dpto;
+import javax.swing.ImageIcon;
 
 public class InfoDialog extends JDialog {
 
@@ -27,6 +28,7 @@ public class InfoDialog extends JDialog {
 	private JLabel labelFacultad;
 	private JLabel labelJefeDpto;
 	private JButton button;
+	private JButton button_1;
 
 
 	public InfoDialog(Dpto d) {
@@ -36,7 +38,7 @@ public class InfoDialog extends JDialog {
 		setResizable(false);
 		setType(Type.POPUP);
 		setUndecorated(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 400);
 		getContentPane().setLayout(new BorderLayout());
 		//contentPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -84,6 +86,20 @@ public class InfoDialog extends JDialog {
 		labelJefeDpto.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		labelJefeDpto.setBounds(10, 225, 426, 42);
 		contentPanel.add(labelJefeDpto);
+		
+		button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button_1.setIcon(new ImageIcon(InfoDialog.class.getResource("/imagenes/Button.png")));
+		button_1.setContentAreaFilled(false);
+		button_1.setBorderPainted(false);
+		button_1.setBorder(null);
+		button_1.setBounds(144, 324, 161, 63);
+		contentPanel.add(button_1);
 		
 		cargarInfo(d);
 	}

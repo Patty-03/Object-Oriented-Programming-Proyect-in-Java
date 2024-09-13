@@ -126,7 +126,7 @@ public class Docente {
     		salario+=100;
     	}
     	
-    	if(catCientif.equalsIgnoreCase("Doctor")){
+    	if(catCientif.equalsIgnoreCase("Doctor en Ciencias")){
     		salario += 500;
     	}
     	else if(catCientif.equalsIgnoreCase("Máster")){
