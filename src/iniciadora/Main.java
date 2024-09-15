@@ -42,8 +42,8 @@ public class Main {
 		Docente prof2 = new Docente("85121067683", "Fermin Rivas", "Disponible", 4500, 11, "Ninguno", "Ninguno");
 		Adiestrado ad1 = new Adiestrado("00122158945", "Daniel Pardo", "Disponible", 3000, 1,"Adiestrado", "Ninguno", true);
 		Adiestrado ad2 = new Adiestrado("00122158945", "Sheila Pérez", "Disponible", 3000, 2,"Adiestrado", "Ninguno", false);
-		Docente prof3 = new Docente("70051918956", "Raisa Socorro", "Disponible", 5000, 30, "Profesor Titular", "Máster en Ciencias");
-		Docente prof4 = new Docente("70051918956", "Alejandro Rosette", "Beca", 5000, 30, "Profesor Titular", "Máster en Ciencias");
+		Docente prof3 = new Docente("70051918956", "Raisa Socorro", "Disponible", 5000, 30, "Profesor Titular", "Doctor en Ciencias");
+		Docente prof4 = new Docente("70051918956", "Alejandro Rosette", "Beca", 5000, 30, "Profesor Titular", "Doctor en Ciencias");
 		Docente prof5 = new Docente("03081598657", "Omar David", "Disponible", 2500, 0, "ATD", "Ninguno");
 		
 		dpto.getDocentes().add(prof1);

@@ -30,7 +30,7 @@ public class Planificacion {
     }
 
     public void setCurso(int curso) {
-        if (curso > 0) {
+        if (curso > 2010) {
             this.curso = curso;
         } else {
             throw new IllegalArgumentException("El curso debe ser un número positivo.");

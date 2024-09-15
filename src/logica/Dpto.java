@@ -29,7 +29,7 @@ public class Dpto {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
         } else {
-            throw new IllegalArgumentException("El nombre del departamento no puede estar vacï¿½o.");
+            throw new IllegalArgumentException("El nombre del departamento no puede estar vacío.");
         }
     }
 
@@ -37,7 +37,7 @@ public class Dpto {
         if (facultad != null && !facultad.trim().isEmpty()) {
             this.facultad = facultad;
         } else {
-            throw new IllegalArgumentException("El nombre de la facultad no puede estar vacï¿½o.");
+            throw new IllegalArgumentException("El nombre de la facultad no puede estar vacío.");
         }
     }
 
@@ -45,7 +45,7 @@ public class Dpto {
         if (nombreJefeDpto != null && !nombreJefeDpto.trim().isEmpty()) {
             this.nombreJefeDpto = nombreJefeDpto;
         } else {
-            throw new IllegalArgumentException("El nombre del jefe de departamento no puede estar vacï¿½os.");
+            throw new IllegalArgumentException("El nombre del jefe de departamento no puede estar vacío.");
         }
     }
 
