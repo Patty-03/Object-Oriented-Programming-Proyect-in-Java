@@ -11,13 +11,13 @@ public class ProfesoresTableModel extends DefaultTableModel{
 
 	public ProfesoresTableModel(){
 		String[] columnNames = {
-				"Nombre", "CI", "Disponibilidad", "Aï¿½os de trabajo", "Cat.Docente", "Cat.Cientifica", "Autorizacion"};
+				"Nombre", "CI", "Disponibilidad", "Años de trabajo", "Cat.Docente", "Cat.Cientifica", "Autorizacion"};
 		this.setColumnIdentifiers(columnNames);
 	}
 
 	public ProfesoresTableModel(Docente [] docentes){
 		String[] columnNames = {
-				"Nombre", "CI", "Disponibilidad", "Aï¿½os de trabajo", "Cat.Docente", "Cat.Cientifica", "Autorizacion"};
+				"Nombre", "CI", "Disponibilidad", "Años de trabajo", "Cat.Docente", "Cat.Cientifica", "Autorizacion"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < docentes.length; i++) {
 
@@ -31,7 +31,7 @@ public class ProfesoresTableModel extends DefaultTableModel{
 	public void adicionar(String nombre, String iD, String disponibilidad, int antiguedad, 
 	        String catDoc, String catCientif, boolean autorizacion){
 	    Object[] newRow = new Object[]{
-	        nombre, iD, disponibilidad, antiguedad, catDoc, catCientif, autorizacion ? "SÃ­" : "No" 
+	        nombre, iD, disponibilidad, antiguedad, catDoc, catCientif, autorizacion ? "Si" : "No" 
 	    };
 	    addRow(newRow);
 	}
@@ -52,8 +52,10 @@ public class ProfesoresTableModel extends DefaultTableModel{
 	    setValueAt(catCientif, pos, 5);
 	    
 	    if (catDoc.equals("Adiestrado")) {
-	        setValueAt(autorizacion ? "SÃ­" : "No", pos, 6); 
+	        setValueAt(autorizacion ? "Si" : "No", pos, 6); 
 	    }
+	    else
+	    	setValueAt(autorizacion, pos, 6);
 	}
 
 	public void actualizarTabla(){
@@ -66,12 +68,8 @@ public class ProfesoresTableModel extends DefaultTableModel{
 	
 	public String ponerAutorizacion(Docente d){
 	    if (d instanceof Adiestrado) {
-	        return ((Adiestrado)d).isAutorizacion() ? "SÃ­" : "No";
+	        return ((Adiestrado)d).isAutorizacion() ? "Si" : "No";
 	    }
 	    return "Si";
 	}
-    @Override
-    public boolean isCellEditable(int row, int column) {
-        return false;
-    }
 }

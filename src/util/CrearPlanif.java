@@ -25,7 +25,6 @@ import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
 import logica.AsigPorProf;
 import logica.Dpto;
@@ -180,26 +179,30 @@ public class CrearPlanif extends JDialog {
 
 		button = new JButton("");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int horas, grupo, semestre, curso;
-				String asig, tipoE, nombreProf;
+		    public void actionPerformed(ActionEvent e) {
+		        int horas, grupo, semestre, curso;
+		        String asig, tipoE, nombreProf;
 
-				horas = (int) spinner.getValue();
-				grupo = Integer.parseInt((String) comboBoxGrupo.getSelectedItem());
-				semestre = Integer.parseInt((String) comboBoxSemestre.getSelectedItem());
-				Date fecha = dateChooser.getDate();
-				asig = (String) comboBoxAsig.getSelectedItem();
-				tipoE = (String) comboBoxEnsenanza.getSelectedItem();
-				nombreProf = (String) comboBoxProf.getSelectedItem();
-				curso = Integer.parseInt((String) comboBoxCurso.getSelectedItem());
-				AsigPorProf a = new AsigPorProf(horas, asig, tipoE, nombreProf, grupo);
+		        horas = (int) spinner.getValue();
+		        grupo = Integer.parseInt((String) comboBoxGrupo.getSelectedItem());
+		        semestre = Integer.parseInt((String) comboBoxSemestre.getSelectedItem());
+		        Date fecha = dateChooser.getDate();
+		        asig = (String) comboBoxAsig.getSelectedItem();
+		        tipoE = (String) comboBoxEnsenanza.getSelectedItem();
+		        nombreProf = (String) comboBoxProf.getSelectedItem();
+		        curso = Integer.parseInt((String) comboBoxCurso.getSelectedItem());
+		        AsigPorProf a = new AsigPorProf(horas, asig, tipoE, nombreProf, grupo);
 
-				dpto.agregarPlanif(new Planificacion(fecha, curso, semestre, a));
+		        if (dpto.existePlanificacion(nombreProf, asig, tipoE, grupo, curso, semestre)) {
+		            JOptionPane.showMessageDialog(CrearPlanif.this, "Ya existe una planificación con los mismos datos.", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
 
-				JOptionPane.showMessageDialog(CrearPlanif.this, "Planificacion agregada al registro de manera satisfactoria");
-				ppal.cargarTablaPlanif();
-				dispose();
-			}
+		        dpto.agregarPlanif(new Planificacion(fecha, curso, semestre, a));
+		        JOptionPane.showMessageDialog(CrearPlanif.this, "Planificación agregada al registro de manera satisfactoria");
+		        ppal.cargarTablaPlanif();
+		        dispose();
+		    }
 		});
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.setIcon(new ImageIcon(CrearPlanif.class.getResource("/imagenes/Button.png")));
@@ -222,31 +225,10 @@ public class CrearPlanif extends JDialog {
 		panel.add(lblAgregarPlanificaciones);
 
 		button_1 = new JButton("X");
-		button.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        int horas, grupo, semestre, curso;
-		        String asig, tipoE, nombreProf;
-
-		        horas = (int) spinner.getValue();
-		        grupo = Integer.parseInt((String) comboBoxGrupo.getSelectedItem());
-		        semestre = Integer.parseInt((String) comboBoxSemestre.getSelectedItem());
-		        Date fecha = dateChooser.getDate();
-		        asig = (String) comboBoxAsig.getSelectedItem();
-		        tipoE = (String) comboBoxEnsenanza.getSelectedItem();
-		        nombreProf = (String) comboBoxProf.getSelectedItem();
-		        curso = Integer.parseInt((String) comboBoxCurso.getSelectedItem());
-		        AsigPorProf a = new AsigPorProf(horas, asig, tipoE, nombreProf, grupo);
-
-		        if (dpto.existePlanificacion(nombreProf, asig, tipoE, grupo, curso, semestre)) {
-		            JOptionPane.showMessageDialog(CrearPlanif.this, "Ya existe una planificaciÃ³n con los mismos datos.", "Error", JOptionPane.ERROR_MESSAGE);
-		            return;
-		        }
-
-		        dpto.agregarPlanif(new Planificacion(fecha, curso, semestre, a));
-		        JOptionPane.showMessageDialog(CrearPlanif.this, "PlanificaciÃ³n agregada al registro de manera satisfactoria");
-		        ppal.cargarTablaPlanif();
-		        dispose();
-		    }
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
 		});
 
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

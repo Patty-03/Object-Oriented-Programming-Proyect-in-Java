@@ -26,6 +26,7 @@ public class EditarDatosDpto extends JDialog {
 	private JTextField textFieldFacultad;
 	private JTextField textFieldJefeDpto;
 	private JButton button_1;
+	private Validaciones validar;
 
 	public EditarDatosDpto(final Dpto d) {
 		setType(Type.POPUP);
@@ -38,17 +39,25 @@ public class EditarDatosDpto extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
+		validar = new Validaciones();
 		
 		JButton button = new JButton("");
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				d.setNombre(textFieldNombre.getText());
-				d.setFacultad(textFieldFacultad.getText());
-				d.setNombreJefeDpto(textFieldJefeDpto.getText());				
-				
-				JOptionPane.showMessageDialog(EditarDatosDpto.this, "Datos del departamento editados correctamente");
-				dispose();
+				if(validar.validarVacio(textFieldNombre, "Nombre Dpto") && 
+						validar.validarVacio(textFieldFacultad, "Facultad") && 
+						validar.validarVacio(textFieldJefeDpto, "Jefe Dpto") &&
+						validar.contieneNumeros(textFieldNombre, "Nombre Dpto") && 
+						validar.contieneNumeros(textFieldFacultad, "Facultad") && 
+						validar.contieneNumeros(textFieldJefeDpto, "Jefe Dpto")){
+					d.setNombre(textFieldNombre.getText());
+					d.setFacultad(textFieldFacultad.getText());
+					d.setNombreJefeDpto(textFieldJefeDpto.getText());				
+					
+					JOptionPane.showMessageDialog(EditarDatosDpto.this, "Datos del departamento editados correctamente");
+					dispose();
+				}
 			}
 		});
 		button.setIcon(new ImageIcon(EditarDatosDpto.class.getResource("/imagenes/Button.png")));

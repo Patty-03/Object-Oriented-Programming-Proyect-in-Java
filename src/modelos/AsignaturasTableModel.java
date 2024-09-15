@@ -15,7 +15,7 @@ public class AsignaturasTableModel extends DefaultTableModel{
 	
 	public AsignaturasTableModel(Asignatura [] asignaturas){
 		String[] columnNames = {
-				"Nombre", "Disciplina", "Plan", "Semestre", "Carrera", "Aï¿½o", "Evaluacion Final"};
+				"Nombre", "Disciplina", "Plan", "Semestre", "Carrera", "Año", "Evaluacion Final"};
 		this.setColumnIdentifiers(columnNames);
 		for (int i = 0; i < asignaturas.length; i++) {
 			Object[] newRow = new Object[]{asignaturas[i].getNombre(), asignaturas[i].getDisciplina(), 
@@ -50,8 +50,4 @@ public class AsignaturasTableModel extends DefaultTableModel{
 			i++;
 		}
 	}
-    @Override
-    public boolean isCellEditable(int row, int column) {
-        return false;
-    }
 }
