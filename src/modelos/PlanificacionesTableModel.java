@@ -1,10 +1,7 @@
 package modelos;
 
-import java.util.Date;
-
 import javax.swing.table.DefaultTableModel;
 
-import logica.AsigPorProf;
 import logica.Planificacion;
 
 public class PlanificacionesTableModel extends DefaultTableModel{
@@ -30,9 +27,8 @@ public class PlanificacionesTableModel extends DefaultTableModel{
 		}
 	}
 	
-	public void adicionar(Date fecha, int curso, int semestre, AsigPorProf asignacion){
-		Object[] newRow = new Object[]{fecha, curso, semestre, asignacion.getNombreProf(), asignacion.getAsignatura(), asignacion.getGrupo(),
-				asignacion.getHorasClase(), asignacion.getTipoEnsenanza()};
+	public void adicionar(String fecha, int curso, int semestre, String nombreProf, String asig, int grupo, int horas, String tipoE){
+		Object[] newRow = new Object[]{fecha, curso, semestre, nombreProf, asig, grupo, horas, tipoE};
 		addRow(newRow);
 	}
 	
@@ -40,15 +36,15 @@ public class PlanificacionesTableModel extends DefaultTableModel{
 		removeRow(pos);
 	}
 	
-	public void modificar(int pos, Date fecha, int curso, int semestre, AsigPorProf asignacion){
+	public void modificar(int pos, String fecha, int curso, int semestre, String nombreProf, String asig, int grupo, int horas, String tipoE){
 		setValueAt(fecha, pos, 0);
 		setValueAt(curso, pos, 1);
 		setValueAt(semestre, pos, 2);
-		setValueAt(asignacion.getNombreProf(), pos, 3);
-		setValueAt(asignacion.getAsignatura(), pos, 4);
-		setValueAt(asignacion.getGrupo(), pos, 5);
-		setValueAt(asignacion.getHorasClase(), pos, 6);
-		setValueAt(asignacion.getTipoEnsenanza(), pos, 7);
+		setValueAt(nombreProf, pos, 3);
+		setValueAt(asig, pos, 4);
+		setValueAt(grupo, pos, 5);
+		setValueAt(horas, pos, 6);
+		setValueAt(tipoE, pos, 7);
 	}
 	
 	public void actualizarTabla(){

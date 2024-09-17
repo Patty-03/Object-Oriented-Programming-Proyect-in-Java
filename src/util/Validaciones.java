@@ -70,4 +70,6 @@ public class Validaciones extends JOptionPane {
         }
         return resultado;
     }
+    
+    
 }

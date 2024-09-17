@@ -3,6 +3,7 @@ package util;
 import interfaz.Principal;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,10 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import logica.AsigPorProf;
 import logica.Asignatura;
 import logica.Docente;
 import logica.Dpto;
@@ -29,10 +28,6 @@ import modelos.AsigPorDisciplinaTableModel;
 import modelos.AsigPorProfTableModel;
 import modelos.ProfPorAsigTableModel;
 import modelos.ProfPorDispTableModel;
-
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
 
 public class ReportesPopup extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -120,13 +115,15 @@ public class ReportesPopup extends JDialog {
 		
 		Docente[] valores = new Docente[prof.size()];
 		
-		int i = 0;
 		
-		for(Docente a: prof){
-			valores[i] = a;
-			i++;
+		
+		for(int i = 0; i < prof.size(); i++){
+			valores[i] = prof.get(i);
+			System.out.println(valores[i].getNombre()+ " Reportes");
 		}
+		
 		ProfPorDispTableModel tableModel = new ProfPorDispTableModel(valores);
+		tableModel.actualizarTabla(d, disp);
 		
 		return tableModel;
 	}

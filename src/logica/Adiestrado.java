@@ -15,7 +15,11 @@ public class Adiestrado extends Docente {
         setAutorizacion(autorizacion);
     }
 
-    public boolean isAutorizacion() {
+    public Adiestrado() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean isAutorizacion() {
         return autorizacion;
     }
 

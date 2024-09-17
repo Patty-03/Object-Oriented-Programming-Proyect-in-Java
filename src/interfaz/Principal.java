@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -28,15 +29,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logica.Adiestrado;
 import logica.AsigPorProf;
 import logica.Asignatura;
 import logica.Docente;
 import logica.Dpto;
 import logica.Planificacion;
+import logica.TipoEnsenanza;
 import modelos.AsignacionesTableModel;
 import modelos.AsignaturasTableModel;
 import modelos.PlanificacionesTableModel;
-import modelos.ProfMas12Horas;
 import modelos.ProfesoresTableModel;
 import util.AyudaPopUp;
 import util.CerrarSesion;
@@ -46,7 +48,6 @@ import util.CrearPlanif;
 import util.CrearProfesor;
 import util.EditarDatosDpto;
 import util.InfoDialog;
-import util.MostrarReportesPopup;
 import util.ReportesPopup;
 
 public class Principal extends JFrame {
@@ -199,7 +200,7 @@ public class Principal extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tituloTabla.setText("PROFESORES");
-				p1.actualizarTabla();
+				p1.actualizarTabla(d);
 				tabla.setModel(p1);
 			}
 		});
@@ -269,7 +270,9 @@ public class Principal extends JFrame {
 				profDialog.setSize(654, 520);
 				profDialog.setLocation(600,300);
 				profDialog.setVisible(true);
+				p1.actualizarTabla(d);
 				tabla.setModel(p1);
+				tituloTabla.setText("PROFESORES");
 			}
 		});
 		button_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -289,6 +292,8 @@ public class Principal extends JFrame {
 				CrearPlanif dialogPlanif = new CrearPlanif(Principal.this, dpto);
 				dialogPlanif.setSize(530, 491);
 				dialogPlanif.setVisible(true);
+				tituloTabla.setText("PLANIFICACIONES");
+				pl1.actualizarTabla();
 			}
 		});
 		button_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -308,6 +313,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CrearAsignatura dialog = new CrearAsignatura(Principal.this, dpto);
 				dialog.setVisible(true);
+				tituloTabla.setText("ASIGNATURAS");
 				tabla.setModel(a1);
 			}
 		});
@@ -398,35 +404,29 @@ public class Principal extends JFrame {
 		mntmEditar = new JMenuItem("Editar");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//COMING SOON
-				/*try{
-					int pos = tabla.getSelectedRow();
-					System.out.println(tabla.getValueAt(pos, 1));
-					if (pos != -1){
-						if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("ProfesoresTableModel")){
-							p1.modificar(pos, (String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 1), (String)tabla.getValueAt(pos, 2), 
-									(int)tabla.getValueAt(pos, 3), (String)tabla.getValueAt(pos, 4), (String)tabla.getValueAt(pos, 5), 
-									(String)tabla.getValueAt(pos, 6), (String)tabla.getValueAt(pos, 7));
-							p1.actualizarTabla();
-						}
-						else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsiganturasTableModel")){
-							cargarTablaAsig();
-						}
-						else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("PlanificacionesTableModel")){
-							cargarTablaPlanif();
-						}
-						else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignacionesTableModel")){
-							cargarTablaAsignaciones();
-						}
-					}
 
+				try{
+					int pos = tabla.getSelectedRow();
+					if (pos != -1){
+						editarProf(pos, d);
+					}
+					else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignaturasTableModel")){
+						editarAsig(pos, d);
+					}
+					else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("PlanificacionesTableModel")){
+						editarPlanif(pos, d);
+					}
+					else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignacionesTableModel")){
+						editarASignacion(pos, d);
+					}
+					JOptionPane.showMessageDialog(Principal.this, "Elemento editado satisfactoriamente");
 				}
 				catch(ArrayIndexOutOfBoundsException ex){
-					JOptionPane.showMessageDialog(Principal.this, "Seleccione una fila para eliminar");
+					JOptionPane.showMessageDialog(Principal.this, "Seleccione una fila para editar");
 				}
-			}*/
-		}});
-		
+			}
+		});
+
 		mntmEditarDatosDpto = new JMenuItem("Editar Datos Dpto");
 		mntmEditarDatosDpto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -453,13 +453,14 @@ public class Principal extends JFrame {
 		mntmBorrar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mntmBorrar.setBorder(null);
 		mnMenu.add(mntmBorrar);
-		
+
 		JMenuItem mntmNuevaASig = new JMenuItem("Nueva Asignacion");
 		mntmNuevaASig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearAsignacion asignacionDialog = new CrearAsignacion(Principal.this, dpto);
 				asignacionDialog.setLocation(600,300);
 				asignacionDialog.setVisible(true);
+				tituloTabla.setText("ASIGNACIONES");
 				tabla.setModel(as1);
 			}
 		});
@@ -482,7 +483,7 @@ public class Principal extends JFrame {
 		mntmDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] array = new String[2];
-				array[0] = "ProgramaciÃ³n";
+				array[0] = "Programación";
 				array[1] = "Inteligencia Artificial";
 				aparecerPopupReportes("Seleccione la disciplina deseada", array, "AsigPorDisciplinaTableModel");
 			}
@@ -524,7 +525,7 @@ public class Principal extends JFrame {
 				array[3] = "Asistente";
 				array[4] = "Instructor";
 				array[5] = "Adiestrado";
-				aparecerPopupReportes("Escriba la CategorÃ­a Docente deseada", array, "ProfPorCatDocTableModel");
+				aparecerPopupReportes("Escriba la Categoría Docente deseada", array, "ProfPorCatDocTableModel");
 
 			}
 		});
@@ -538,9 +539,9 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] array = new String[3];
 				array[0] = "Doctor en Ciencias";
-				array[1] = "MÃ¡ster en Ciencias";
+				array[1] = "Máster en Ciencias";
 				array[2] = "Ninguno";
-				aparecerPopupReportes("Seleccione la CategorÃ­a CientÃ­fica deseada", array, "ProfporCatCientif");
+				aparecerPopupReportes("Seleccione la Categoría Científica deseada", array, "ProfporCatCientif");
 
 			}
 		});
@@ -604,15 +605,6 @@ public class Principal extends JFrame {
 		mntmDocentePorAsignatura.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOtros.add(mntmDocentePorAsignatura);
 
-		JMenuItem mntmDocentesConMs = new JMenuItem("Docentes con más de 12h");
-		mntmDocentesConMs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		mntmDocentesConMs.setForeground(Color.DARK_GRAY);
-		mntmDocentesConMs.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		mnOtros.add(mntmDocentesConMs);
-
 		background = new JLabel("");
 		background.setBounds(0, 0, 1000, 600);
 		panel_1.add(background);
@@ -626,7 +618,7 @@ public class Principal extends JFrame {
 		contentPane.add(tituloTabla);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(277, 135, 711, 405);
+		scrollPane.setBounds(262, 135, 726, 405);
 		contentPane.add(scrollPane);
 
 		tabla = new JTable();
@@ -698,6 +690,7 @@ public class Principal extends JFrame {
 			i++;
 		}
 		tableModel = new PlanificacionesTableModel(valores);
+		((PlanificacionesTableModel) tableModel).actualizarTabla();
 		tabla.setModel(tableModel);
 
 		return (PlanificacionesTableModel) tableModel;
@@ -721,27 +714,36 @@ public class Principal extends JFrame {
 		return (AsignacionesTableModel) tableModel;
 	}
 
+
 	public void eliminarElmto(JTable tabla){
 		try{
 			int pos = tabla.getSelectedRow();
-			System.out.println(tabla.getValueAt(pos, 1));
 			if (pos != -1){
 				if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("ProfesoresTableModel")){
+					d.eliminarDocente(tabla.getValueAt(pos, 1).toString());
 					p1.eliminar(pos);
-					p1.actualizarTabla();
+					p1.actualizarTabla(d);
+					tituloTabla.setText("PROFESORES");
 				}
 				else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignaturasTableModel")){
+					d.eliminarAsignatura(tabla.getValueAt(pos, 0).toString());
 					a1.eliminar(pos);
 					a1.actualizarTabla();
+					tituloTabla.setText("ASIGNATURAS");
 				}
 				else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("PlanificacionesTableModel")){
+					d.eliminarPlanificacion(tabla.getValueAt(pos, 4).toString(), tabla.getValueAt(pos, 7).toString());
 					pl1.eliminar(pos);
 					pl1.actualizarTabla();
+					tituloTabla.setText("PLANIFICACIONES");
 				}
 				else if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("AsignacionesTableModel")){
+					d.eliminarAsignacion(tabla.getValueAt(pos, 1).toString(), tabla.getValueAt(pos, 2).toString());
 					as1.eliminar(pos);
 					as1.actualizarTabla();
+					tituloTabla.setText("ASIGNACIONES");
 				}
+				JOptionPane.showMessageDialog(Principal.this, "Elemento eliminado satisfactoriamente");
 			}
 
 		}
@@ -756,5 +758,88 @@ public class Principal extends JFrame {
 
 	public ProfesoresTableModel getProfesoresTableModel(){
 		return p1;
+	}
+
+	public void actualizarTablaPlanif(Dpto d){
+		pl1.actualizarTabla();
+	}
+
+
+	public void editarProf(int pos, Dpto d){
+		if(tabla.getModel().getClass().getSimpleName().equalsIgnoreCase("ProfesoresTableModel")){
+			p1.modificar(pos, (String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 1), (String)tabla.getValueAt(pos, 2), 
+					Float.parseFloat(tabla.getValueAt(pos, 3).toString()),
+					Integer.parseInt(tabla.getValueAt(pos, 4).toString()), (String)tabla.getValueAt(pos, 5), (String)tabla.getValueAt(pos, 6), 
+					(String)tabla.getValueAt(pos, 7) == "Si");
+
+
+			if(tabla.getValueAt(pos, 5).toString().equals("Adiestrado")){
+				Adiestrado adi = new Adiestrado( (String)tabla.getValueAt(pos, 1),(String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 2), 
+						Float.parseFloat(tabla.getValueAt(pos, 3).toString()),
+						Integer.parseInt(tabla.getValueAt(pos, 4).toString()), (String)tabla.getValueAt(pos, 5), (String)tabla.getValueAt(pos, 6), 
+						Boolean.parseBoolean((String)tabla.getValueAt(pos, 7)));
+				System.out.println(adi.getiD());
+				d.actualizarProfConIndice(pos, adi);
+			}
+			else{
+				Docente prof = new Docente((String)tabla.getValueAt(pos, 1),(String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 2), 
+						Float.parseFloat(tabla.getValueAt(pos, 3).toString()),
+						Integer.parseInt(tabla.getValueAt(pos, 4).toString()), (String)tabla.getValueAt(pos, 5), (String)tabla.getValueAt(pos, 6));
+				System.out.println(prof.getNombre());
+				d.actualizarProfConIndice(pos, prof);
+			}
+
+
+			tabla.setModel(p1);
+		}
+	}
+	
+	public void editarPlanif(int pos, Dpto d){
+		pl1.modificar(pos, tabla.getValueAt(pos, 0).toString(), Integer.parseInt(tabla.getValueAt(pos, 1).toString()), 
+				Integer.parseInt(tabla.getValueAt(pos, 2).toString()), (String)tabla.getValueAt(pos, 3), (String)tabla.getValueAt(pos, 4),
+				Integer.parseInt(tabla.getValueAt(pos, 5).toString()), Integer.parseInt(tabla.getValueAt(pos, 6).toString()),
+				(String)tabla.getValueAt(pos, 7));
+
+		Planificacion planif = new Planificacion(tabla.getValueAt(pos, 0).toString(), Integer.parseInt(tabla.getValueAt(pos, 1).toString()),
+				Integer.parseInt(tabla.getValueAt(pos, 2).toString()), new AsigPorProf( Integer.parseInt(tabla.getValueAt(pos, 6).toString()), 
+						(String)tabla.getValueAt(pos, 4), (String)tabla.getValueAt(pos, 7), (String)tabla.getValueAt(pos, 3),
+						Integer.parseInt(tabla.getValueAt(pos, 5).toString())));
+		d.actualizarPlanifConIndice(pos, planif);
+		tabla.setModel(pl1);
+		
+	}
+	
+	public void editarAsig(int pos, Dpto d){
+		ArrayList<TipoEnsenanza> tipos = new ArrayList<>();
+
+		tipos.add(new TipoEnsenanza("Conferencia", Integer.parseInt(tabla.getValueAt(pos, 7).toString())));
+		tipos.add(new TipoEnsenanza("Clase Práctica", Integer.parseInt(tabla.getValueAt(pos, 8).toString())));
+		tipos.add(new TipoEnsenanza("Laboratorio", Integer.parseInt(tabla.getValueAt(pos, 9).toString())));
+		tipos.add(new TipoEnsenanza("Seminario", Integer.parseInt(tabla.getValueAt(pos, 10).toString())));
+		tipos.add(new TipoEnsenanza("Taller", Integer.parseInt(tabla.getValueAt(pos, 11).toString())));
+
+		a1.modificar(pos, (String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 1), 
+				(Character)tabla.getValueAt(pos, 2), Integer.parseInt(tabla.getValueAt(pos, 3).toString()), 
+				(String)tabla.getValueAt(pos, 4), Integer.parseInt(tabla.getValueAt(pos, 5).toString()), (String)tabla.getValueAt(pos, 6), tipos);
+
+		Asignatura a = new Asignatura((String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 1), 
+				(Character)tabla.getValueAt(pos, 2), Integer.parseInt(tabla.getValueAt(pos, 3).toString()), 
+				(String)tabla.getValueAt(pos, 4), Integer.parseInt(tabla.getValueAt(pos, 5).toString()), (String)tabla.getValueAt(pos, 6), tipos);
+
+		d.actualizarAsigConIndice(pos, a);
+		tabla.setModel(a1);
+	}
+	
+	public void editarASignacion(int pos, Dpto d){
+		as1.modificar(pos, (String)tabla.getValueAt(pos, 0), (String)tabla.getValueAt(pos, 1),
+				(String)tabla.getValueAt(pos, 2), Integer.parseInt(tabla.getValueAt(pos, 3).toString()), 
+				Integer.parseInt(tabla.getValueAt(pos, 4).toString()));
+
+		AsigPorProf asigP = new AsigPorProf( Integer.parseInt(tabla.getValueAt(pos, 6).toString()), 
+				(String)tabla.getValueAt(pos, 4), (String)tabla.getValueAt(pos, 7), (String)tabla.getValueAt(pos, 3),
+				Integer.parseInt(tabla.getValueAt(pos, 5).toString()));
+
+		d.actualizarAsignacionConIndice(pos, asigP);
+		tabla.setModel(as1);
 	}
 }

@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -25,8 +27,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
+import logica.AsigPorProf;
 import logica.Dpto;
 
 public class CrearAsignacion extends JDialog {
@@ -40,6 +42,56 @@ public class CrearAsignacion extends JDialog {
 	private JButton button_1;
 	private JButton aceptarBtn;
 	private Principal p;
+	
+	private boolean verificarDuplicado(String profesor, String asignatura, String tipoEnsenanza, Dpto d) {
+	    for (AsigPorProf asignacion : d.getAsignacionesAsignaturas()) {
+	        if (asignacion.getNombreProf().equals(profesor) &&
+	            asignacion.getAsignatura().equals(asignatura) &&
+	            asignacion.getTipoEnsenanza().equals(tipoEnsenanza)) {
+	            return true; 
+	        }
+	    }
+	    return false; 
+	}
+	
+	private boolean validarAsignaciones(String asignatura, String tipoEnsenanza, int grupo, Dpto d) {
+	    int contadorConferencia = 0;
+	    int contadorClasePractica = 0;
+	    int contadorSeminario = 0;
+	    ArrayList<String> gruposConTipoEnsenanza = new ArrayList<>();
+
+	    for (AsigPorProf asignacion : d.getAsignacionesAsignaturas()) {
+	        if (asignacion.getAsignatura().equals(asignatura)) {
+	            switch (asignacion.getTipoEnsenanza()) {
+	                case "Conferencia":
+	                    contadorConferencia++;
+	                    break;
+	                case "Clase Práctica":
+	                    contadorClasePractica++;
+	                    break;
+	                case "Seminario":
+	                    contadorSeminario++;
+	                    break;
+	            }
+	        }
+	        if (asignacion.getGrupo() == grupo) {
+	            gruposConTipoEnsenanza.add(asignacion.getTipoEnsenanza());
+	        }
+	    }
+
+	    if ((tipoEnsenanza.equals("Conferencia") && contadorConferencia >= 2) ||
+	        (tipoEnsenanza.equals("Clase Práctica") && contadorClasePractica >= 4) ||
+	        (tipoEnsenanza.equals("Seminario") && contadorSeminario >= 4)) {
+	        return false; 
+	    }
+
+	    if (gruposConTipoEnsenanza.contains(tipoEnsenanza)) {
+	        return false; 
+	    }
+
+	    return true;
+	}
+
 
 	public CrearAsignacion(final Principal ppal, final Dpto d) {
 		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
@@ -129,7 +181,7 @@ public class CrearAsignacion extends JDialog {
 			comboBoxAsignatura.setModel(new DefaultComboBoxModel<>(array));
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(this, "Bateo aqui " + e.getMessage() + " " + e.getCause());
+			JOptionPane.showMessageDialog(this, "Hay error aqui " + e.getMessage() + " " + e.getCause());
 		}
 		
 
@@ -164,11 +216,42 @@ public class CrearAsignacion extends JDialog {
 		contentPanel.add(lblHoras);
 
 		aceptarBtn = new JButton("");
-		aceptarBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
+		aceptarBtn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
 			}
 		});
+		aceptarBtn.setMnemonic(KeyEvent.VK_ENTER);
+		aceptarBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        String profesor = (String) comboBoxProf.getSelectedItem();
+		        String asignatura = (String) comboBoxAsignatura.getSelectedItem();
+		        String tipoEnsenanza = (String) comboBoxEnsenanza.getSelectedItem();
+		        int grupo = Integer.parseInt((String) comboBoxGrupo.getSelectedItem());
+		        int horas = (int) spinner.getValue();
+
+		        if (verificarDuplicado(profesor, asignatura, tipoEnsenanza, d)) {
+		            JOptionPane.showMessageDialog(CrearAsignacion.this, 
+		                "El profesor ya tiene una asignación para esta asignatura y tipo de enseñanza.",
+		                "Asignación Duplicada",
+		                JOptionPane.WARNING_MESSAGE);
+		        } else if (!validarAsignaciones(asignatura, tipoEnsenanza, grupo, d)) {
+		            JOptionPane.showMessageDialog(CrearAsignacion.this, 
+		                "No se puede agregar esta asignación. Verifique las restricciones de cantidad y grupos.",
+		                "Restricciones No Cumplidas",
+		                JOptionPane.WARNING_MESSAGE);
+		        } else {
+		            d.agregarAsignacion(horas, asignatura, tipoEnsenanza, profesor, grupo);
+		            JOptionPane.showMessageDialog(CrearAsignacion.this, 
+		                "Asignación agregada con Éxito.",
+		                "Éxito",
+		                JOptionPane.INFORMATION_MESSAGE);
+		            dispose();
+		        }
+		    }
+		});
+
+
 		aceptarBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		aceptarBtn.setIcon(new ImageIcon(CrearAsignacion.class.getResource("/imagenes/Button.png")));
 		aceptarBtn.setContentAreaFilled(false);

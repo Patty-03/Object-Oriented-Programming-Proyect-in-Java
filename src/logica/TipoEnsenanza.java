@@ -21,7 +21,7 @@ public class TipoEnsenanza {
     }
 
     public void setHoras(int horas) {
-        if (horas > 0) {
+        if (horas >= 0) {
             this.horas = horas;
         } else {
             throw new IllegalArgumentException("Las horas deben ser un número positivo.");

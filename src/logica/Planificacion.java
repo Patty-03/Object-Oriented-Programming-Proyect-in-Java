@@ -17,9 +17,16 @@ public class Planificacion {
         return date;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         if (fecha != null) {
-            this.fecha = fecha;
+        	try{
+        		Date f = new Date(fecha);
+                this.fecha = f;
+        	}
+            catch(Exception e){
+            	System.out.println(e.getMessage() + " " + e.getCause());
+            }
+        	
         } else {
             throw new IllegalArgumentException("La fecha no puede estar vacía.");
         }
@@ -30,7 +37,7 @@ public class Planificacion {
     }
 
     public void setCurso(int curso) {
-        if (curso > 0) {
+        if (curso > 2010) {
             this.curso = curso;
         } else {
             throw new IllegalArgumentException("El curso debe ser un número positivo.");
@@ -61,7 +68,7 @@ public class Planificacion {
         }
     }
 
-    public Planificacion(Date fecha, int curso, int semestre, AsigPorProf asignacion) {
+    public Planificacion(String fecha, int curso, int semestre, AsigPorProf asignacion) {
         setFecha(fecha);
         setCurso(curso);
         setSemestre(semestre);

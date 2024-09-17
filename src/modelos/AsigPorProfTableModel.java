@@ -25,5 +25,4 @@ public class AsigPorProfTableModel extends DefaultTableModel{
 			addRow(newRow);
 		}
 	}
-
 }

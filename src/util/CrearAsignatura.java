@@ -78,10 +78,12 @@ public class CrearAsignatura extends JDialog {
 	private JComboBox<Object> comboBoxSemestre;
 	private JButton button;
 	private AsignaturasTableModel a1;
+	private Validaciones validaciones;
 
 
 	@SuppressWarnings("rawtypes")
 	public CrearAsignatura(Principal p, final Dpto dpto) {
+		validaciones = new Validaciones();
 		getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setType(Type.UTILITY);
@@ -130,6 +132,7 @@ public class CrearAsignatura extends JDialog {
 
 		comboBoxPlanEstudio = new JComboBox<String>();
 		comboBoxPlanEstudio.setModel(new DefaultComboBoxModel(new Character[] {'A', 'B', 'C', 'D', 'E'}));
+		comboBoxPlanEstudio.setSelectedItem('E');
 		comboBoxPlanEstudio.setBounds(208, 259, 65, 22);
 		contentPanel.add(comboBoxPlanEstudio);
 
@@ -139,6 +142,8 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(label_3);
 
 		checkBoxConf = new JCheckBox("");
+		checkBoxConf.setEnabled(false);
+		checkBoxConf.setSelected(true);
 		checkBoxConf.setBounds(505, 153, 31, 21);
 		contentPanel.add(checkBoxConf);
 
@@ -261,22 +266,22 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(spinnerConf);
 
 		spinnerCP = new JSpinner();
-		spinnerCP.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerCP.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerCP.setBounds(592, 205, 49, 22);
 		contentPanel.add(spinnerCP);
 
 		spinnerLab = new JSpinner();
-		spinnerLab.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerLab.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerLab.setBounds(592, 276, 49, 22);
 		contentPanel.add(spinnerLab);
 
 		spinnerTaller = new JSpinner();
-		spinnerTaller.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerTaller.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerTaller.setBounds(592, 337, 49, 22);
 		contentPanel.add(spinnerTaller);
 
 		spinnerSem = new JSpinner();
-		spinnerSem.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerSem.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerSem.setBounds(592, 398, 49, 22);
 		contentPanel.add(spinnerSem);
 
@@ -313,9 +318,13 @@ public class CrearAsignatura extends JDialog {
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (validaciones.validarVacio(textFieldNombre, "Nombre") && 
+	                    validaciones.contieneNumeros(textFieldNombre, "Nombre") &&
+	                	validaciones.validarVacio(textFieldDisciplina, "Disciplina") &&
+	                	validaciones.contieneNumeros(textFieldDisciplina, "Disciplina")){
 				a1 = crearAsignatura(dpto);
 				JOptionPane.showMessageDialog(CrearAsignatura.this, "Asignatura agregada de manera satisfactoria");
-				dispose();
+				dispose();}
 			}
 		});
 		button_1.setIcon(new ImageIcon(CrearAsignatura.class.getResource("/imagenes/Button.png")));
@@ -336,51 +345,66 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(comboBoxSemestre);
 	}
 	
-	public AsignaturasTableModel crearAsignatura(Dpto dpto){
-		String nombre, disciplina, carrera, evFinal;
-		char planEstudio;
-		int anio;
-		int semestre;
+	public AsignaturasTableModel crearAsignatura(Dpto dpto) {
+	    String nombre, disciplina, carrera, evFinal;
+	    char planEstudio;
+	    int anio;
+	    int semestre;
+	    int c = 0, cP = 0, lab = 0, sem = 0, taller = 0;
 
-		nombre = textFieldNombre.getText();
-		disciplina = textFieldDisciplina.getText();
-		planEstudio = (char) comboBoxPlanEstudio.getSelectedItem();
-		carrera = (String) comboboxCarrera.getSelectedItem();
-		evFinal = (String) comboBoxEvFinal.getSelectedItem();
-		anio = (int) comboBoxAnio.getSelectedItem();
-		semestre = (int)comboBoxSemestre.getSelectedItem();
+	    nombre = textFieldNombre.getText().trim().toLowerCase();  
+	    disciplina = textFieldDisciplina.getText().trim();
+	    planEstudio = (char) comboBoxPlanEstudio.getSelectedItem();
+	    carrera = (String) comboboxCarrera.getSelectedItem();
+	    evFinal = (String) comboBoxEvFinal.getSelectedItem();
+	    anio = (int) comboBoxAnio.getSelectedItem();
+	    semestre = (int) comboBoxSemestre.getSelectedItem();
+	    ArrayList<TipoEnsenanza> tipos = new ArrayList<TipoEnsenanza>();
 
-		ArrayList<TipoEnsenanza> tipos = new ArrayList<TipoEnsenanza>();
 
-		if(checkBoxConf.isSelected()){
-			TipoEnsenanza t1 = new TipoEnsenanza("Conferencia", (int) spinnerConf.getValue()); 
-			tipos.add(t1);
-		}
+	    for (Asignatura asignatura : dpto.getAsignaturas()) {
+	        if (asignatura.getNombre().trim().toLowerCase().equals(nombre)) { 
+	            JOptionPane.showMessageDialog(CrearAsignatura.this, "Ya existe una asignatura con el nombre ingresado.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return null;
+	        }
+	    }
 
-		if(checkBoxCP.isSelected()){
-			TipoEnsenanza t2 = new TipoEnsenanza("Clase Practica", (int) spinnerCP.getValue()); 
-			tipos.add(t2);
-		}
+	    
 
-		if(checkBoxLab.isSelected()){
-			TipoEnsenanza t3 = new TipoEnsenanza("Laboratorio", (int) spinnerLab.getValue()); 
-			tipos.add(t3);
-		}
+	    
+	    	System.out.println((int) spinnerConf.getValue());
+	        c = (int) spinnerConf.getValue();
+	        TipoEnsenanza t1 = new TipoEnsenanza("Conferencia", c);
+	        tipos.add(t1);
+	    
 
-		if(checkBoxSem.isSelected()){
-			TipoEnsenanza t3 = new TipoEnsenanza("Seminario", (int) spinnerSem.getValue()); 
-			tipos.add(t3);
-		}
+	   
+	    	cP = (int) spinnerCP.getValue();
+	        TipoEnsenanza t2 = new TipoEnsenanza("Clase Practica", cP);
+	        tipos.add(t2);
+	    
 
-		if(checkBoxTaller.isSelected()){
-			TipoEnsenanza t3 = new TipoEnsenanza("Taller", (int) spinnerTaller.getValue()); 
-			tipos.add(t3);
-		}
+	    
+	    	lab = (int) spinnerLab.getValue();
+	        TipoEnsenanza t3 = new TipoEnsenanza("Laboratorio", lab);
+	        tipos.add(t3);
+	    
 
-		dpto.agregarAsignatura(new Asignatura(nombre, disciplina, planEstudio, 
-				semestre, carrera, anio, evFinal, tipos));
-		a1 = pPrincipal.getAsignaturasTableModel();
-		a1.adicionar(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal);
-		return a1;
+	    
+	    	sem = (int) spinnerSem.getValue();
+	        TipoEnsenanza t4 = new TipoEnsenanza("Seminario", sem);
+	        tipos.add(t4);
+	    
+
+	   
+	    	taller = (int) spinnerTaller.getValue();
+	        TipoEnsenanza t5 = new TipoEnsenanza("Taller", taller);
+	        tipos.add(t5);
+	    
+
+	    dpto.agregarAsignatura(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal, tipos);
+	    a1 = pPrincipal.getAsignaturasTableModel();
+	    a1.adicionar(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal, tipos);
+	    return a1;
 	}
 }
