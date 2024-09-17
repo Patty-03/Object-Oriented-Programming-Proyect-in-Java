@@ -142,6 +142,8 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(label_3);
 
 		checkBoxConf = new JCheckBox("");
+		checkBoxConf.setEnabled(false);
+		checkBoxConf.setSelected(true);
 		checkBoxConf.setBounds(505, 153, 31, 21);
 		contentPanel.add(checkBoxConf);
 
@@ -264,22 +266,22 @@ public class CrearAsignatura extends JDialog {
 		contentPanel.add(spinnerConf);
 
 		spinnerCP = new JSpinner();
-		spinnerCP.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerCP.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerCP.setBounds(592, 205, 49, 22);
 		contentPanel.add(spinnerCP);
 
 		spinnerLab = new JSpinner();
-		spinnerLab.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerLab.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerLab.setBounds(592, 276, 49, 22);
 		contentPanel.add(spinnerLab);
 
 		spinnerTaller = new JSpinner();
-		spinnerTaller.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerTaller.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerTaller.setBounds(592, 337, 49, 22);
 		contentPanel.add(spinnerTaller);
 
 		spinnerSem = new JSpinner();
-		spinnerSem.setModel(new SpinnerNumberModel(1, 1, 30, 1));
+		spinnerSem.setModel(new SpinnerNumberModel(0, 0, 30, 1));
 		spinnerSem.setBounds(592, 398, 49, 22);
 		contentPanel.add(spinnerSem);
 
@@ -348,6 +350,7 @@ public class CrearAsignatura extends JDialog {
 	    char planEstudio;
 	    int anio;
 	    int semestre;
+	    int c = 0, cP = 0, lab = 0, sem = 0, taller = 0;
 
 	    nombre = textFieldNombre.getText().trim().toLowerCase();  
 	    disciplina = textFieldDisciplina.getText().trim();
@@ -356,6 +359,7 @@ public class CrearAsignatura extends JDialog {
 	    evFinal = (String) comboBoxEvFinal.getSelectedItem();
 	    anio = (int) comboBoxAnio.getSelectedItem();
 	    semestre = (int) comboBoxSemestre.getSelectedItem();
+	    ArrayList<TipoEnsenanza> tipos = new ArrayList<TipoEnsenanza>();
 
 
 	    for (Asignatura asignatura : dpto.getAsignaturas()) {
@@ -365,36 +369,42 @@ public class CrearAsignatura extends JDialog {
 	        }
 	    }
 
-	    ArrayList<TipoEnsenanza> tipos = new ArrayList<TipoEnsenanza>();
+	    
 
-	    if (checkBoxConf.isSelected()) {
-	        TipoEnsenanza t1 = new TipoEnsenanza("Conferencia", (int) spinnerConf.getValue());
+	    
+	    	System.out.println((int) spinnerConf.getValue());
+	        c = (int) spinnerConf.getValue();
+	        TipoEnsenanza t1 = new TipoEnsenanza("Conferencia", c);
 	        tipos.add(t1);
-	    }
+	    
 
-	    if (checkBoxCP.isSelected()) {
-	        TipoEnsenanza t2 = new TipoEnsenanza("Clase Practica", (int) spinnerCP.getValue());
+	   
+	    	cP = (int) spinnerCP.getValue();
+	        TipoEnsenanza t2 = new TipoEnsenanza("Clase Practica", cP);
 	        tipos.add(t2);
-	    }
+	    
 
-	    if (checkBoxLab.isSelected()) {
-	        TipoEnsenanza t3 = new TipoEnsenanza("Laboratorio", (int) spinnerLab.getValue());
+	    
+	    	lab = (int) spinnerLab.getValue();
+	        TipoEnsenanza t3 = new TipoEnsenanza("Laboratorio", lab);
 	        tipos.add(t3);
-	    }
+	    
 
-	    if (checkBoxSem.isSelected()) {
-	        TipoEnsenanza t4 = new TipoEnsenanza("Seminario", (int) spinnerSem.getValue());
+	    
+	    	sem = (int) spinnerSem.getValue();
+	        TipoEnsenanza t4 = new TipoEnsenanza("Seminario", sem);
 	        tipos.add(t4);
-	    }
+	    
 
-	    if (checkBoxTaller.isSelected()) {
-	        TipoEnsenanza t5 = new TipoEnsenanza("Taller", (int) spinnerTaller.getValue());
+	   
+	    	taller = (int) spinnerTaller.getValue();
+	        TipoEnsenanza t5 = new TipoEnsenanza("Taller", taller);
 	        tipos.add(t5);
-	    }
+	    
 
-	    dpto.agregarAsignatura(new Asignatura(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal, tipos));
+	    dpto.agregarAsignatura(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal, tipos);
 	    a1 = pPrincipal.getAsignaturasTableModel();
-	    a1.adicionar(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal);
+	    a1.adicionar(nombre, disciplina, planEstudio, semestre, carrera, anio, evFinal, tipos);
 	    return a1;
 	}
 }

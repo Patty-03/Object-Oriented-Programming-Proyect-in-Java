@@ -187,6 +187,7 @@ public class CrearPlanif extends JDialog {
 		        grupo = Integer.parseInt((String) comboBoxGrupo.getSelectedItem());
 		        semestre = Integer.parseInt((String) comboBoxSemestre.getSelectedItem());
 		        Date fecha = dateChooser.getDate();
+		        String fechaString = fecha.toString();
 		        asig = (String) comboBoxAsig.getSelectedItem();
 		        tipoE = (String) comboBoxEnsenanza.getSelectedItem();
 		        nombreProf = (String) comboBoxProf.getSelectedItem();
@@ -198,7 +199,7 @@ public class CrearPlanif extends JDialog {
 		            return;
 		        }
 
-		        dpto.agregarPlanif(new Planificacion(fecha, curso, semestre, a));
+		        dpto.agregarPlanif(fechaString, curso, semestre, a);
 		        JOptionPane.showMessageDialog(CrearPlanif.this, "Planificación agregada al registro de manera satisfactoria");
 		        ppal.cargarTablaPlanif();
 		        dispose();

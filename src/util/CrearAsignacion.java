@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -25,7 +27,6 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import logica.AsigPorProf;
 import logica.Dpto;
@@ -65,7 +66,7 @@ public class CrearAsignacion extends JDialog {
 	                case "Conferencia":
 	                    contadorConferencia++;
 	                    break;
-	                case "Clase Pr谩ctica":
+	                case "Clase Pr醕tica":
 	                    contadorClasePractica++;
 	                    break;
 	                case "Seminario":
@@ -79,7 +80,7 @@ public class CrearAsignacion extends JDialog {
 	    }
 
 	    if ((tipoEnsenanza.equals("Conferencia") && contadorConferencia >= 2) ||
-	        (tipoEnsenanza.equals("Clase Pr谩ctica") && contadorClasePractica >= 4) ||
+	        (tipoEnsenanza.equals("Clase Pr醕tica") && contadorClasePractica >= 4) ||
 	        (tipoEnsenanza.equals("Seminario") && contadorSeminario >= 4)) {
 	        return false; 
 	    }
@@ -180,7 +181,7 @@ public class CrearAsignacion extends JDialog {
 			comboBoxAsignatura.setModel(new DefaultComboBoxModel<>(array));
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(this, "Bateo aqui " + e.getMessage() + " " + e.getCause());
+			JOptionPane.showMessageDialog(this, "Hay error aqui " + e.getMessage() + " " + e.getCause());
 		}
 		
 
@@ -215,6 +216,12 @@ public class CrearAsignacion extends JDialog {
 		contentPanel.add(lblHoras);
 
 		aceptarBtn = new JButton("");
+		aceptarBtn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+		});
+		aceptarBtn.setMnemonic(KeyEvent.VK_ENTER);
 		aceptarBtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        String profesor = (String) comboBoxProf.getSelectedItem();
@@ -225,20 +232,19 @@ public class CrearAsignacion extends JDialog {
 
 		        if (verificarDuplicado(profesor, asignatura, tipoEnsenanza, d)) {
 		            JOptionPane.showMessageDialog(CrearAsignacion.this, 
-		                "El profesor ya tiene una asignaci贸n para esta asignatura y tipo de ense帽anza.",
-		                "Asignaci贸n Duplicada",
+		                "El profesor ya tiene una asignaci髇 para esta asignatura y tipo de ense馻nza.",
+		                "Asignaci髇 Duplicada",
 		                JOptionPane.WARNING_MESSAGE);
 		        } else if (!validarAsignaciones(asignatura, tipoEnsenanza, grupo, d)) {
 		            JOptionPane.showMessageDialog(CrearAsignacion.this, 
-		                "No se puede agregar esta asignaci贸n. Verifique las restricciones de cantidad y grupos.",
+		                "No se puede agregar esta asignaci髇. Verifique las restricciones de cantidad y grupos.",
 		                "Restricciones No Cumplidas",
 		                JOptionPane.WARNING_MESSAGE);
 		        } else {
-		            AsigPorProf nuevaAsignacion = new AsigPorProf(horas, asignatura, tipoEnsenanza, profesor, grupo);
-		            d.agregarAsignacion(nuevaAsignacion);
+		            d.agregarAsignacion(horas, asignatura, tipoEnsenanza, profesor, grupo);
 		            JOptionPane.showMessageDialog(CrearAsignacion.this, 
-		                "Asignaci贸n agregada con 茅xito.",
-		                "脡xito",
+		                "Asignaci髇 agregada con 蓌ito.",
+		                "蓌ito",
 		                JOptionPane.INFORMATION_MESSAGE);
 		            dispose();
 		        }
@@ -254,6 +260,4 @@ public class CrearAsignacion extends JDialog {
 		aceptarBtn.setBounds(219, 265, 161, 63);
 		contentPanel.add(aceptarBtn);
 	}
-	
-	
 }

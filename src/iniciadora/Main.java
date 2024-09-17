@@ -110,9 +110,9 @@ public class Main {
 		//Inicializar Planificaciones
 		ArrayList<Planificacion> registro = new ArrayList<Planificacion>();
 		
-		Planificacion p1 = new Planificacion(new Date(2024, 7, 25), 2024, 1, asp1);
-		Planificacion p2 = new Planificacion(new Date(2024, 7, 28), 2024, 1, asp2);
-		Planificacion p3 = new Planificacion(new Date(2024, 8, 4), 2024, 1, asp3);
+		Planificacion p1 = new Planificacion("2024-7-25", 2024, 1, asp1);
+		Planificacion p2 = new Planificacion("2024-7-28", 2024, 1, asp2);
+		Planificacion p3 = new Planificacion("2024-8-3", 2024, 1, asp3);
 		
 		registro.add(p1);
 		registro.add(p2);

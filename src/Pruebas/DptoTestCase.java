@@ -21,12 +21,12 @@ public class DptoTestCase extends TestCase{
 	}
 
 	@Test
-	public void testNombreNoNulo(){
-		assertNotNull(dpto.getNombre());
+	public void testFacultadNoNulo(){
+		assertNotNull(dpto.getFacultad());
 	}
 	
 	@Test
-	public void testNombreNoVacio(){
-		assertEquals(false, dpto.getNombre().isEmpty());
+	public void testNombreJefeDptoNoVacio(){
+		assertEquals(false, dpto.getNombreJefeDpto().isEmpty());
 	}
 }

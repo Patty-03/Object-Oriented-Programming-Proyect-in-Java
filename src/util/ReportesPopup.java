@@ -115,13 +115,15 @@ public class ReportesPopup extends JDialog {
 		
 		Docente[] valores = new Docente[prof.size()];
 		
-		int i = 0;
 		
-		for(Docente a: prof){
-			valores[i] = a;
-			i++;
+		
+		for(int i = 0; i < prof.size(); i++){
+			valores[i] = prof.get(i);
+			System.out.println(valores[i].getNombre()+ " Reportes");
 		}
+		
 		ProfPorDispTableModel tableModel = new ProfPorDispTableModel(valores);
+		tableModel.actualizarTabla(d, disp);
 		
 		return tableModel;
 	}

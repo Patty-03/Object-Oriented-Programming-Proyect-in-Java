@@ -18,7 +18,12 @@ public class AsigPorProf {
     }
 
 
-    public void setHorasClase(int horasClase) {
+    public AsigPorProf() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public void setHorasClase(int horasClase) {
         if (horasClase > 0) {
             this.horasClase = horasClase;
         } else {

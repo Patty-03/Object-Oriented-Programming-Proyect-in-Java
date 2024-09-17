@@ -121,4 +121,15 @@ public class Asignatura {
     public ArrayList<TipoEnsenanza> getEnsenanzas() {
         return ensenanzas;
     }
+    
+    public int getHoras(String tE){
+    	int h = 0;
+    	
+    	for(TipoEnsenanza e: ensenanzas){
+    		if(e.getNombre().equals(tE)){
+    			h = e.getHoras();
+    		}
+    	}
+    	return h;
+    }
 }

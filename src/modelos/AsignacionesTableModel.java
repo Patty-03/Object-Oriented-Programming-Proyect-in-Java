@@ -3,6 +3,7 @@ package modelos;
 import javax.swing.table.DefaultTableModel;
 
 import logica.AsigPorProf;
+import logica.Dpto;
 
 public class AsignacionesTableModel extends DefaultTableModel{
 	private static final long serialVersionUID = 1L;
@@ -44,8 +45,8 @@ public class AsignacionesTableModel extends DefaultTableModel{
 	public void actualizarTabla(){
 		for(int i = 0; i< this.getRowCount(); i++){
 			this.setValueAt(this.getValueAt(i, i),i,i);
+			System.out.println(this.getValueAt(i, i));
 			i++;
 		}
 	}
-	
 }

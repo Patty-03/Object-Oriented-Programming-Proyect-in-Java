@@ -22,7 +22,13 @@ public class Docente {
     }
 
 
-    public void setiD(String iD) {
+    public Docente() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public void setiD(String iD) {
+		System.out.println(iD);
         if (iD != null && !iD.trim().isEmpty() && iD.matches("^[a-zA-Z0-9]+$")) {
             this.iD = iD;
         } else {

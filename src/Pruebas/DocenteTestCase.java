@@ -1,13 +1,13 @@
 package Pruebas;
 
-import junit.framework.TestCase;
 import logica.Docente;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-public class DocenteTestCase extends TestCase{
+public class DocenteTestCase{
 	private Docente doc;
 	
 	@Before
@@ -21,12 +21,12 @@ public class DocenteTestCase extends TestCase{
 	}
 	
 	@Test
-	public void catDocNoNull(){
-		assertNotNull(doc.getCatDoc());
+	public void setIDNoNull(){
+		assertNotNull(doc.getiD());
 	}
 	
 	@Test
-	public void catDocNoVacio(){
-		assertEquals(false, doc.getCatDoc().isEmpty());
+	public void salarioValido(){
+		assertNotNull(doc.getSalario());
 	}
 }

@@ -74,6 +74,11 @@ public class EditarDatosDpto extends JDialog {
 		contentPanel.add(lblEditarDepartamento);
 		
 		button_1 = new JButton("X");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button_1.setToolTipText("Salir");
 		button_1.setForeground(Color.BLACK);

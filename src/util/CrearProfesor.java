@@ -5,7 +5,6 @@ import interfaz.Principal;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,18 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.*;
-import java.awt.*;
 
-import logica.Adiestrado;
-import logica.Docente;
 import logica.Dpto;
-import util.Validaciones;
 import modelos.ProfesoresTableModel;
 
 public class CrearProfesor extends JDialog{
@@ -201,19 +194,19 @@ public class CrearProfesor extends JDialog{
 		        if (validaciones.validarVacio(textFieldNombre, "Nombre") && 
 		            validaciones.contieneNumeros(textFieldNombre, "Nombre") &&
 		            validaciones.validarCI(textFieldCI) &&
-		            validaciones.validarSeleccion(comboBoxCatCientif, "Categoría Científica") &&
-		            validaciones.validarSeleccion(comboBoxCatDoc, "Categoría Docente")) {
+		            validaciones.validarSeleccion(comboBoxCatCientif, "Categoria Cientifica") &&
+		            validaciones.validarSeleccion(comboBoxCatDoc, "Categoria Docente")) {
 		        	
 		            if (dpto.existeProfesorConCI(ci)) {
 		                JOptionPane.showMessageDialog(CrearProfesor.this, 
-		                    "Ya existe un profesor con este número de CI.",
+		                    "Ya existe un profesor con este numero de CI.",
 		                    "CI Duplicado",
 		                    JOptionPane.WARNING_MESSAGE);
 		            } else {
 		                p1 = crearProfesor(dpto);
 		                JOptionPane.showMessageDialog(CrearProfesor.this, 
 		                    "Profesor agregado de manera satisfactoria.",
-		                    "Éxito",
+		                    "�xito",
 		                    JOptionPane.INFORMATION_MESSAGE);
 		                dispose();
 		            }
@@ -238,6 +231,11 @@ public class CrearProfesor extends JDialog{
 					comboBoxCatCientif.setSelectedItem("Ninguno");
 					comboBoxCatCientif.setEnabled(false);
 				}
+				else if(item.equals("Profesor Titular")){
+					noAutorizado.setEnabled(false);
+					autorizado.setEnabled(false);
+					comboBoxCatCientif.setSelectedIndex(1);
+				}
 				else{
 					noAutorizado.setEnabled(false);
 					autorizado.setEnabled(false);
@@ -248,12 +246,12 @@ public class CrearProfesor extends JDialog{
 		
 		
 
-		comboBoxCatDoc.setModel(new DefaultComboBoxModel(new String[] {"Titular", "Auxiliar", "Asistente", "Instructor", "ATD", "Adiestrado"}));
+		comboBoxCatDoc.setModel(new DefaultComboBoxModel(new String[] {"Profesor Titular", "Auxiliar", "Asistente", "Instructor", "ATD", "Adiestrado"}));
 		comboBoxCatDoc.setBounds(496, 141, 116, 22);
 		getContentPane().add(comboBoxCatDoc);
 		
 		comboBoxCatCientif = new JComboBox();
-		comboBoxCatCientif.setModel(new DefaultComboBoxModel(new String[] {"Ninguno", "Doctor en Ciencias", "M\u00E1ster"}));
+		comboBoxCatCientif.setModel(new DefaultComboBoxModel(new String[] {"Ninguno", "Doctor en Ciencias", "M�ster en Ciencias"}));
 		comboBoxCatCientif.setBounds(496, 201, 116, 22);
 		getContentPane().add(comboBoxCatCientif);
 		
@@ -278,7 +276,6 @@ public class CrearProfesor extends JDialog{
 	    String catCientif = (String) comboBoxCatCientif.getSelectedItem();
 	    int antiguedad = (int) spinnerAntiguedad.getValue();
 	    float salarioBase = (float) spinnerSalario.getValue();
-	    boolean isAdiestrado = false;
 	    boolean autorizacion = true;
 
 	    if (buttonGroup.getSelection() == noAutorizado) {
@@ -286,14 +283,15 @@ public class CrearProfesor extends JDialog{
 	    }
 
 	    if (catDoc.equals("Adiestrado")) {
-	        isAdiestrado = true;
-	        dpto.agregarDocente(new Adiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, autorizacion));
+	        dpto.agregarAdiestrado(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, autorizacion);
+	        System.out.println("Adiestrado agregado");
 	    } else {
-	        dpto.agregarDocente(new Docente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif));
+	        dpto.agregarDocente(iD, nombre, disponibilidad, salarioBase, antiguedad, catDoc, catCientif);
+	        System.out.println("Docente agregado");
 	    }
 
 	    p1 = ppal.getProfesoresTableModel();
-	    p1.adicionar(nombre, iD, disponibilidad, antiguedad, catDoc, catCientif, autorizacion);
+	    p1.adicionar(nombre, iD, disponibilidad, salarioBase, antiguedad, catDoc, catCientif, autorizacion);
 	    return p1;
 	}
 
